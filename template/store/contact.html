@@ -1,0 +1,33 @@
+    {% extends 'base.html' %}
+
+    {% block title %}product list{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    {% endblock %}
+
+    {% block content %}
+    <div class="main-container" id="contact-page">
+        <div class="title">
+            <h6>Contact Information</h6>
+        </div>
+        <div class="contact-details">
+            <div class="address">
+                <i class='bx bx-location-plus'></i>
+                <h3>our Address</h3>
+                <span>abc.xyz,jjj-000000</span>
+            </div>
+            <div class="phone">
+                <i class='bx bx-phone' ></i>
+                <h3>phone number</h3>
+                <span>+91 xxxxxxxxxx</span>
+            </div>
+            <div class="email">
+                <i class='bx bx-envelope' ></i>
+                <h3>email Address</h3>
+                <span>xxxxxxxx@gmail.com</span>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

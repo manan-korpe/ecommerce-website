@@ -1,0 +1,424 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior:smooth;
+    font-family: 'Rubik', sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+button{
+    background-color: #ff8c00e6;
+    color: white;
+    border: none;
+    transition: all .30s ease;
+}
+button:hover{
+    background-color: greenyellow;
+    transform: scale(1.1);
+}
+/*--------------header --------------start-----------------------*/
+
+/*-------------------header--------end------*/
+#slider-container {
+    border-radius: 10px;
+    width: 100%;
+    max-width: 100%;
+  height: 450px;
+  overflow: hidden;
+  margin: 30px auto;
+  position: relative;
+}
+#image-list {
+
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+  height:100%
+}
+#image-list>li{
+    flex:0 0 100%;
+
+}
+.slider-image {
+  width: 100%;
+  height: 100%;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 30px;
+  color: white;
+  transition: all 0.4s ease;
+}
+.slider-btn:hover{
+    background-color: transparent;
+    color: green;
+    transform: scale(1);
+}
+#prev-btn {
+  left: 10px;
+}
+#next-btn {
+  right: 10px;
+}
+/* --------slider ----------end-------------*/
+.center-text{
+    margin-top:60px ;
+    margin-bottom: 30px;
+}
+.center-text h2{
+    color: black;
+    font-size: 35px;
+    text-transform: capitalize;
+    text-align: center;
+}
+.center-text span{
+    margin-left: 5px;
+    font-size: 35px;
+    color: green;
+}
+.products{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,auto));
+    justify-items: center;
+    gap:2rem;
+    padding: 10px 60px;
+}
+.row{
+    position: relative;
+    transition: all .45s;
+    border-radius: 10px;
+    padding: 10px;
+}
+.products .row:hover{
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .4),
+    0 2px 8px rgba(0, 0, 0, .4),
+    0 2px 8px rgba(0, 0, 0, .4),
+    0 2px 8px rgba(0, 0, 0, .4);
+}
+.products img{
+    width: 100%;
+    height:280px;
+    transition: all .45s;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, .4);
+}
+.products img:hover{
+    transform: scale(0.9);
+}
+.product-text h5{
+    position: absolute;
+    top:13px;
+    left:13px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    background-color: green;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+.heart-icon i {
+    position: absolute;
+    padding-top: 10px;
+    right: 10px;
+    font-size: 25px;
+}
+.bxs-heart{
+    color: green;
+ }
+.bx-heart{
+    color:green;
+}
+.heart-icon i{
+    transition: all 1s ease;
+}
+.heart-icon i:hover{
+color: green;
+transform: scale(1.2);
+}
+.ratting{
+    padding-top: 10px;
+}
+.ratting i{
+    color: #ff8c00;
+    font-size:18px;
+}
+.price h4{
+    color:#111;
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: 500;
+    margin: 10px auto;
+}
+.price p{
+    color:green;
+    font-size: 20px;
+    font-weight: 600;  
+}
+.row button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+/*---footer----*/
+
+
+/*-------------4 grid product start---------------*/
+.desc{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,auto));
+    gap:1rem;
+    padding: 0px 60px;
+}
+.row img{
+    width: 100%;
+    height: 300px;
+    transition: all .45s;
+    border-radius:10px;
+}
+.desc img, .gardner img{
+    background-color: green;
+    opacity: .8;
+}
+.desc-text h4{
+    color:#111;
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: 500;
+    margin: 7px auto;
+}
+.details{
+    border: 2px solid;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    max-width: 500px;
+    max-height: 80px;
+}
+.desc-text span{
+    color: #111;
+    font-size: 16px;
+    font-weight: 350;
+}
+.desc-text{
+    position: absolute;
+    top:20%;
+    left: 10%;
+}
+.desc-text button{
+    font-size: 18px;
+    margin-top: 40px ;
+    display: block;
+}
+
+/*-------------article---------------------*/
+
+.blog{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(380px,auto));
+    gap:1rem;
+    padding: 0px 60px 20px 60px;
+
+    text-align: center;
+}
+.blog .row{
+    position: relative;
+    width: 100%;
+    transition: all .45s;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+.blog .row:hover{
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .4),
+    0 2px 8px rgba(0, 0, 0, .4),
+    0 2px 8px rgba(0, 0, 0, .4),
+    0 2px 8px rgba(0, 0, 0, .4);
+}
+.blog .blog img{
+    width: 100%;
+    height:280px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: all .45s ease;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, .4);
+}
+.blog img:hover{
+    transform: scale(0.95);
+}
+.blog-text h4{
+    color:#111;
+    font-size: 17px;
+    text-transform: capitalize;
+    font-weight: 400;
+    margin: 5px auto;
+}
+.blog-text a{
+    color: green;
+    font-size: 16px;
+    font-weight: 400;
+    transition: all .42s ease;
+}
+.blog-text a:hover{
+    font-size:20px;
+    color: greenyellow;
+}
+
+/*------------gardner start------------------*/
+.gardner{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,auto));
+    gap:1rem;
+    padding: 0px 60px;
+    justify-content: center;
+}
+.gardner img{
+    width: 80%;
+    height: 400px;
+    transition: all .45s;
+}
+.gardner .details{
+    border: none;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    max-width: 200px;
+    max-height: 120px;
+}
+
+/*-----------4-grid -----start*/
+.grid4{
+    width: 100%;
+    height: auto;
+    border-top: solid 1px green;
+    border-bottom: solid 1px green;
+    padding: 30px 60px;
+    background-color: rgba(172, 255, 47, 0.080);
+    box-shadow: 0px 5px 18px rgba(167, 253, 38, 0.281);;
+}
+.detail-grid{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.detail-grid div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.detail-grid i{
+    font-size: 40px;
+    font-weight: 200;
+}
+.detail-grid span{
+    font-size: 23px;
+    font-weight: 400;
+    text-transform: capitalize;
+    margin-top: 10px;
+}
+/*-----------------------------*/
+.op {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, auto));
+    justify-items: center;
+    gap: 1rem;
+    padding: 10px 20px;
+}
+.opr {
+    position: relative;
+    width: 280px;
+    transition: all .45s;
+    border: 1px solid rgb(0, 128, 0);
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(0, 128, 0, 0.338);
+    padding: 10px;
+    margin-top: 10px;
+}
+@media screen and (max-width:790px){
+    #slider-container{
+        height: 250px;
+    }
+    .grid4{
+        padding: 12px 27px;
+    }
+    .detail-grid span{
+        font-size: 15px;
+    }
+    .detail-grid i{
+        font-size: 25px;
+    }
+    
+    .products{
+        grid-template-columns: repeat(auto-fit,minmax(160px,auto));
+    }
+    .row img {
+        height: 250px;
+    }
+    .gardner{
+        grid-template-columns: repeat(auto-fit,minmax(200px,auto));
+        padding: 0px 20px;
+    }
+    .gardner .row{
+        width: 100%;
+    }
+    .gardner img {
+        width: 100%;
+    }
+    .details{
+        max-width: 250px;
+    }
+    .desc-text button{
+        margin-top: 0px;
+    }
+    .blog {
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(300px,auto));
+        gap: 1rem;
+        padding: 0px 10px 20px 10px;
+    }
+}
+/*--------------*/
+@media screen and (max-width:800px) {
+    .filter {
+        margin: 0px;
+        padding: 5px;
+    }
+    .filter label {
+        font-size: 15px;
+        margin-right: 10px;
+    }
+    #sort{
+        padding: 5px;
+        font-size: 15px;
+    }
+    .products {
+        grid-template-columns: repeat(auto-fit,minmax(150px,auto));
+        padding: 10px 5px;
+        gap:0.5rem;
+    }
+    .row {
+        width: 150px;
+        height: 280px;
+        padding: 10px;
+        margin-top: 10px;
+    }
+    .products img {
+        height: 120px;
+    }
+    .ratting i, .price h4, .row button {
+        font-size: 12px;
+    }
+    .ratting {
+        padding-top: 5px;
+        margin-bottom: 5px;
+    }
+    .price p{
+        margin-top: 5px;
+    }
+    .price p , .heart-icon i{
+        font-size: 15px;
+    }
+}

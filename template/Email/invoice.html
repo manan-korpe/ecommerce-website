@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>A simple, clean, and responsive HTML invoice template</title>
+            <style>
+                  body{
+                        font-size:20px;
+                  }
+                  .heading td, .item td{
+                        border:1px solid black;
+                        padding:5px 2px;
+                        margin-bottom: 5px;
+                        
+                  }
+                  .total td{
+                        padding: 5px 0px;
+                  }
+            </style>
+	</head>
+{% load static %}
+	<body >
+		<div class="invoice-box">
+			<table cellpadding="0" cellspacing="0">
+				<tr class="top">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td class="title">
+									<img
+										src="{% static '/hvx4d7i6.png' %}"
+										style="width: 100px;"
+									/>
+								</td>
+
+								<td>
+									Order id #: {{order.id}}<br />
+									Created: {{order.created}}<br />
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+                        <hr>
+				<tr class="information">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td>
+									<b>Address</b>:-<br />
+									 {{order.address}}, <br />
+                                                       {{order.landmark}},<br/>
+                                                       {{order.city}} - {{order.pin_code}}
+								</td>
+
+								<td>
+									<b>{{order.fname}} {{order.lname}}</b><br />
+									{{order.phone}}<br />
+									{{request.user.email}}
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<tr class="information">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td>
+									<b>Payment Method</b><br />
+									{{order.payment_mode}}<br />
+									
+								</td>
+
+								<td>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<tr class="heading">
+					<td>Item</td>
+
+					<td>Price</td>
+				</tr>
+
+                        {% for item in items %}
+				<tr class="item">
+					<td>{{item.product.title}}</td>
+
+					<td> Rs. {{item.subtotal}}</td>
+				</tr>
+                        {% endfor %}
+
+
+				<!--<tr class="item last">
+					<td>Domain name (1 year)</td>
+
+					<td>$10.00</td>
+				</tr>-->
+
+                        <tr class="item">
+					<td>Discount</td>
+
+					<td style="color:red;"> Rs. {{order.discount}}</td>
+				</tr>
+				<tr class="total">
+					<td></td>
+
+					<td>Total: Rs. <b>{{order.amount}}</b></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

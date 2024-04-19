@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us{% endblock %}
+
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+      <div class="error-container"> 
+            <h1> 404 </h1> 
+            <p> 
+            Oops! The page you're 
+            looking for is not here. 
+            </p> 
+            <a href="{% url 'home' %}"> 
+            Go Back to Home 
+            </a> 
+      </div>
+      <style>
+
+.error-container { 
+	text-align: center; 
+	background-color: #fff; 
+	padding: 170px; 
+	border-radius: 5px; 
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+} 
+
+.error-container h1 { 
+	font-size: 5rem; 
+	color: green; 
+} 
+
+.error-container p { 
+	font-size: 1.5rem; 
+	color: #333; 
+	margin-bottom: 20px; 
+} 
+
+.error-container a { 
+	text-decoration: none; 
+	background-color: green; 
+	color: #fff; 
+	padding: 10px 20px; 
+	border-radius: 3px; 
+	font-weight: bold; 
+	transition: background-color 0.3s ease; 
+} 
+
+.error-container a:hover { 
+	background-color: green; 
+}
+
+      </style>
+{% endblock %}

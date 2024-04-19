@@ -1,0 +1,104 @@
+    {% extends 'base.html' %}
+
+    {% block title %}product list{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    {% endblock %}
+
+    {% block content %}
+
+
+    <div class="main-container" id="cart_list">
+        <table >
+            <tr>
+                <th>image</th>
+                <th>product name</th>
+                <th>price</th>
+                <th>quanity</th>
+                <th>total</th>
+                <th>remove</th>
+            </tr>
+        {% if cart_item %}
+            {% for cart in cart_item %}
+            <tr class="data">
+                <td><img src="{{ cart.product.product_image.url }}" alt="" class="product-img"></td>
+                <td>{{cart.product.title}}</td>
+                <td>₹ <span>{{cart.product.offer_price}}</span> <span style="font-size:12px;color:red;text-decoration:line-through;"> ₹{{cart.product.price}}</span></td>
+                <td>
+                    <div class="cart-add">
+                        <button type="submit" onclick="rmvqty('{{cart.product.id}}','cart');" class="btn-remove" id="sub" data-product-id={{cart.product.id}}>-</button>
+                        <input type="text" id="inp-val-{{cart.product.id}}" value={{cart.quantity}} min=1 >
+                        <button type="submit" onclick="addqty('{{cart.product.id}}','cart');" class="btn-add" id="add" data-product-id={{cart.product.id}}>+</button>
+                    </div>
+                </td>
+                <td id="tot-p-{{cart.product.id}}">₹ <span>{{cart.discount_price}}</span> <!--<span style="font-size:12px;color:red;text-decoration:line-through;"> ₹{{cart.total_price}}</span>--></td>
+                <td class="dustbin">
+                    <a href="{% url 'remove_from_cart' cart_item_id=cart.id %}">
+                        <i class='bx bx-trash'></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr class="data">
+            <td id="empty-message" colspan="6">
+                Your cart is empty !
+            </td>
+            </tr>
+        {% endif %}
+        </table>
+        <!--
+        <div class="uc-button">
+
+            <a href="{% url 'productList' category_id=0 %}" ><button type="submit" class="button-two">continue shopping</button></a>
+        </div>
+        -->
+        <div class="second-container">
+            <!--<div class="address">
+                <div class="title"><h4>shipping address</h4></div>
+                <div class="add">
+                    {% if address %}
+                    {% for address in address %}
+                    <input type="radio" name="grp1" value={{address.id}}>
+                    <div class="add-text">{{ address }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <hr>
+            </div>-->
+            {% if cart_item %}
+            <div class="summery">
+            <div class="title"><h4>order summary</h4></div>
+            <div class="charges" id="cart_reload">
+                <div class="charge-product">
+                    product ({{cart_details.total_product}} items) <h5>₹ {{cart_details.total_cart}} </h5>
+                </div>
+                
+                <div class="charge-shipping">
+                    shipping <h5>
+                    {% if shipping_charge == 0 %}
+                    Free
+                    {% else %}
+                    ₹ {{shipping_charge}}
+                    {% endif %}</h5>
+                </div>
+
+                <div class="charge-tax"><!--discount-->
+                    discount <h5 style="color:red">- ₹ {{discount}}</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="total-summery">
+                <div class="charge-total">
+                    total <h5>₹ {{total}}</h5>
+                </div>
+            </div>
+            <a href="{% url 'checkout'%}" class="btn-a"><button type="submit" class="button-two">Checkout</button></a>
+        </div>
+        {% endif %}
+        </div>
+    </div>
+    
+    {% endblock %}

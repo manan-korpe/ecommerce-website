@@ -1,0 +1,59 @@
+{% load static %}
+<header class="header">
+
+        <div class="nav">
+            <div class="web-logo">
+                <a href="#"><img src="{% static '/hvx4d7i6.png' %}" alt="nursery live"></a>
+            </div>
+          
+            <div class="search-bar">
+                <!--category dropdown start-->
+                <div class="category">
+                    <button  onclick="myfunction()" type="submit" class="cat-btn">Category<i class='bx bxs-chevron-down'></i></button>
+                    <div class="cat-items" id="cat-items">
+                        {% for category in data %}
+                        <li class="category-contain">
+                            <a href="{% url 'productList' category_id=category.id %}">{{category.title}}</a>
+                            <div class="sub-cat-items">
+                            {% for subcategory in category.subcategory_set.all %}
+                                <p><a href="{% url 'productList' category_id=category.id subcategory_id=subcategory.id %}">{{subcategory.title}}</a></p>
+                            {% endfor %}
+                            </div>
+                        </li>
+                        {% endfor %}
+                        
+
+                      </div>
+                </div>
+                  <!--category dropdown end-->
+                <div class="search-input">
+                    <input type="search" placeholder="search" class='in-search'>
+                    <div class="search-items" id="search-items">
+                    <ul>
+                       
+                    </ul>
+                    </div>
+                </div>
+                <div class="search-button">
+                    <button type="submit" id="search-button"><i class='bx bx-search-alt-2'></i></button>
+                </div>
+            </div>
+
+            <div class="profile-cart">
+                   <!-- <a href="admin/" class="admin"><i class="fa-solid fa-user-tie"></i></a> -->
+                    <a href="{% url 'profile' %}"><i class='bx bx-user'></i></a>
+                    <a href="{% url 'cart' %}"><i class='bx bx-cart'></i></i></a>
+            </div>
+         
+        </div>
+
+        <div class="nav-link">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'productList' %}">Product</a>
+            <a href="{% url 'ShowArticleList' %}">Article</a>
+            <a href="{% url 'gardnerlist' %}">Gardener</a>
+            <a href="{% url 'aboutUs' %}">AboutUs</a>
+            <a href="{% url 'contact' %}">Contact</a>
+        </div>
+
+    </header>

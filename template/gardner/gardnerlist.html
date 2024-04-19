@@ -1,0 +1,99 @@
+    {% extends 'base.html' %}
+
+    {% block title %}product list{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/gardnerlist.css' %}">
+    {% endblock %}
+
+    {% block content %}
+    {% for service in services %}
+    {% for subservice in service.subservice_set.all %}
+    {% for g in subservice.gardner_set.all %}
+      <div class="one-view" id="hid-{{g.pk}}">
+            <div class="one-details">
+                  <button type="button" class="one-button" onclick="closediv('hid-{{ g.pk }}')"><div class="one-row">X</div></button>
+                  <div class="second-row">
+                        <div class="one-title">{{subservice.title}}</div>
+                        <div class="full-details">
+                              <div class="p"><strong>Charges:- </strong>{{ g.offer_price }}</div>  
+                              <div class="p"><strong>Service:- </strong>{{g.service_type}}</div>    
+                              <div class="p"><strong>Time:- </strong>{{g.service_time}}</div>           
+                              <div class="p"><strong>Place:- </strong>Customer's Place</div>                
+                              
+                        </div>
+                        <div class="full-details">
+                              <div class="title">Service Description</div>
+                              
+                              <div class="full-d-pre">
+                                    Tired of doing your own garden? Don't know how to do a big garden? Tired of getting your hands dirty? Don't know what plants will grow in your balcony? Do not worry, we are here to help you solve all your gardening needs. Book a consultation and an expert will be visiting your place to analyse and evaluate your garden needs and suggest plants, materials and labor cost based on your requirements. Once you approve the materials, and costs involved in it, the work will started by the gardener appointed.
+                              </div>
+                        </div>
+                        <div class="full-details">
+                              <div class="title">Cancellation policy</div>
+                              
+                              <div class="full-d-pre">
+                                    To cancel the service please inform us 24hr earlier. Post which 100% cancellation charges are applicable.
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+      {% endfor %}
+      {% endfor %}
+      {% endfor %}
+      <div class="gardner-container">
+            <div class="serive-fixed">
+            <div class="services">
+                  <div class="titile">Services</div>
+                  <div class="service-list">
+                        {% for service in services %}
+                        <a href="#{{service.id}}">
+                        <div class="list">
+                              <div class="image">
+                                    <img src="{{ service.photo.url }}" alt="">
+                              </div>
+                              <div class="sevice-title">{{service.title}}</div>
+                        </div>
+                        </a>
+                        {% endfor %}
+                  </div>
+            </div>
+            </div>
+            <div class="service-person">
+            {% for serive in services %}
+                  <div class="list-n">
+                        <div class="person-title" id="{{serive.id}}">{{serive.title}}</div>
+                        <div class="person-list">
+                        {% for subservice in serive.subservice_set.all %}
+                        {% for g in subservice.gardner_set.all %}
+                              <div class="pl">
+                                    <div class="details">
+                                          <div class="service-name"> {{subservice.title}} </div>
+                                          <div class="price" style="text-decoration: none;"><strong>Charges:- </strong>₹ {{g.offer_price}}</div>                                    
+                                          <button type="button" class="vd" onclick="showdiv({{g.pk}})">View Details</button>
+                                          <a href="{% url 'booking' gardnerid=g.id %}"> <button type="button" class="bn">Book Now</button></a>
+                                    </div>
+                                    <div class="p-image">
+                                          <img src="{{g.photo.url}}" class="per-image" alt="">
+                                    </div>
+                              </div>
+                        {% endfor %}
+                        {% endfor %}
+                        </div>
+                  </div>
+            {% endfor %}
+           
+            </div>
+      </div>
+      <script>
+            function closediv(id) {
+                  var con = document.getElementById(id);
+                  con.style.display = "none";
+            }
+            function showdiv(val){
+                  document.getElementById("hid-"+val).style.display = "block";
+            }
+      </script>
+    {% endblock %}

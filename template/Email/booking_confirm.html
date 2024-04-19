@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <title>BOOKING CONFIRMATION...!</title>
+</head>
+<body>
+Customer Name:-{{booking_instance.fname}} {{booking_instance.lname}}
+<br>Service name:- {{booking_instance.service_name.title}}
+<br>Service Type:- {{booking_instance.service_name.service}}
+<br>Charges =₹ {{booking_instance.service_offer_amount}} <span style="font-size: 12  px;text-decoration: line-through;color:red;">₹ {{booking_instance.service_amount}}</span>
+<br>Booking date:-{{booking_instance.booking_date}}
+<br>Booking Time:-{{booking_instance.booking_time|time:"h"}}:{{booking_instance.booking_time|time:"i"}} {{booking_instance.booking_time|time:"A"}}
+<br>Customer Phone:-{{booking_instance.phone}}
+<br>Customer Email:-{{booking_instance.email}}
+<br>Service Address:-{{booking_instance.area}},{{booking_instance.city}},{{booking_instance.state}},{{booking_instance.pin_code}}
+                  
+<br><br>
+<br>Gardner Name:-{{booking_instance.gardner.name}}
+<br>Gardener Phone:-{{booking_instance.gardner.phone}}
+<br>Gardner Email:-{{booking_instance.gardner.email}}
+</body>
+</html>

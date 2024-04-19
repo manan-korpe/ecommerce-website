@@ -1,0 +1,250 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: 'Rubik', sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+button{
+    background-color: green;
+    color: white;
+    border: none;
+    transition: all .30s ease;
+}
+button:hover{
+    background-color: greenyellow;
+    transform: scale(1.1);
+}
+/*----------------*/
+.main-section{
+    width: 100%;
+    padding: 20px 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.hero-section-one {
+    width: 25%;
+}
+.hss{
+    position: sticky;
+    top:140px
+  }
+.section-one {
+    font-size: 25px;
+    text-transform: capitalize;
+    padding: 15px 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0px 2px 8px gray inset;
+    width: 100%;
+    height: 300px;
+}
+.profile-img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid green;
+}
+.section-one button {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    text-transform: capitalize;
+    /* margin-left: 10px; */
+    border-radius: 8px;
+    font-size: 1.2rem;
+    border: none;
+    transition: all .7s ease;
+}
+.section-one button:hover{
+    background-color: greenyellow;
+    transform: scale(1.1);
+}
+.profile-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+}
+  .pm-btn{
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 8px;
+    display: inline;
+    margin-block: 5px;
+    text-transform: capitalize;
+
+  } 
+  .active{
+    background-color: white;
+    color: green;
+    border: 2px solid green;
+  }
+  .info-container{
+    width: 70%;
+    display: none;
+}
+.section-second{
+    padding: 20px 40px;
+    width: 100%;
+    margin-bottom: 50px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 8px gray inset;
+    text-transform: capitalize;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+
+.info h3{
+    font-size: 20px;
+    font-weight: 450; 
+}
+
+.info-input{
+    padding: 10px 0px ;
+}
+/*-------------------------------------------*/
+#address-info{
+    padding: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+.section-second input{
+    font-size: 18px;
+    width: 40%;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid green;
+}
+.new-address input{
+    width: 100%;
+    padding: 12px 24px;
+    border-radius: 6px;
+    border: 1px solid green;
+    background: white;
+    font-weight: 500;
+    font-size: 16px;
+    color: #6b7280;
+    outline: none;
+    resize: none;
+}
+.address,textarea{
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid green;
+    resize: none;
+}
+.update-address, .add-address{
+    display: none;
+    width: 100%;
+    margin: 30px 0px;
+    border-radius: 10px;
+    padding: 20px 10px;
+    box-shadow: 0px 2px 8px green;
+    border: 1px solid green;
+}
+#select {
+    width: 20%;
+    /* height: 40px; */
+    border-radius: 11px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+p.details {
+    padding: 5px 0px;
+}
+.info-input button, .sbbutton, .deleteButton{
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 8px;
+    display: inline;
+    margin-block: 20px;
+    text-transform: capitalize;
+}
+#submitprofileButton{
+    display: none;
+}
+
+@media screen and (max-width:790px){
+    .main-section{
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero-section-one{
+        width: 100%;
+        position: static;
+        margin-bottom: 20px;
+
+    }
+    .section-one button {
+        margin-top: 15px;
+    }
+    .section-second button{
+        padding: 10px;
+        font-size: 1rem;
+    }
+    .info h3{
+        font-size: 13px;
+    }
+    .info-container {
+        width: 100%;
+    }
+    .section-second{
+        padding: 20px 20px;
+    }
+    .info-input{
+        padding: 10px 0px;
+    }
+    .section-second input{
+        font-size: 15px;
+        width: 70%;
+        margin-bottom: 20px;
+        padding: 5px;
+    }
+    .address, textarea#id_address{
+        height: 75px;
+        font-size: 12px;
+        padding: 5px;
+    }
+    .info-input button, .sbbutton{
+        font-size: 15px;
+        padding: 8px;
+        margin-block: 10px;
+    }
+}
+strong{
+    font-size: 15px;
+}
+.add-info .extra-form{
+    margin-bottom: 10px;
+}
+.add-info label{
+    display: block;
+    font-weight: 500;
+    font-size: 16px;
+    color: #07074d;
+    margin-bottom: 12px;
+}
+
+.add-title{
+    background-color: green;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 20px; 
+}

@@ -1,0 +1,33 @@
+    {% extends 'base.html' %}
+
+    {% block title %}About Us{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/about-us.css' %}">
+    {% endblock %}
+
+    {% block content %}
+    <div class="about-us">
+            <h3>About Us</h3>
+            <strong>Green Heaven Hursery</strong> germinated in 2014 from a promise to make ‘green and healthy’ a click away for all Indians
+            <ul id="dl">
+                  <li>Having plants in our homes or in our offices doesn’t just look good, it also boosts our mood, makes us more productive, and cleans the air around us by absorbing toxins</li>
+                  <li>Most of us being urban dwellers spending their days in apartments with limited access to parks and ecological reserves, have no way of feeling close to nature and experiencing the benefits of being around plants.</li>
+                  <li>Ordering a pizza is easy but ever heard of ordering a plant to your doorstep? This is where nurserylive comes in.</li>
+                  <li>We believe that Green is Good and are here to enable Indians to access plants in the easiest way possible – online! We are here to shape the future of gardening!</li>
+                  <li>A one-stop-shop for all gardening related requirements, nurserylive has more than 6000 products available online for delivery across India saving you numerous messy trips to various nurseries.</li>
+                  <li>We cater to all kinds of gardening needs ranging from plants, pots, tools, to curated plant-scaping solutions. Our ever-growing platform integrates nurseries and customers across India. </li>
+                  <li>If you’re new to being a plant parent, we’re here to make it easier. Our garden experts can provide you with guidance for detailed care every step of the way.</li>
+                  <li>Having served a network of 1 million happy plant parents, we can assure you that once you order a plant from us, you will emerge with your own home-grown veggies!</li>
+            </ul>
+            <h4>HOW TO WORK</h4>
+            Add a touch of green to your home/office in three simple steps and become a plant parent
+            <ol id="hl">
+                  <li><span>, simplified: Order plants ready to be placed in your home, office or garden. Just Unpack, Relax and Enjoy your green buddies</span></li>
+                  <li><span>Secure Shipping: Our unique packaging will hold the plants in place and let the plant breathe so that it reaches you fresh without any mess.</span></li>
+                  <li><span>Detailed Guidance: Get detailed plant care instructions from the website as well as real-time guidance from our Garden Experts on Whatsapp.</span></li>
+            </ol>
+            We deliver 6000+ garden products across Ahmedabad
+      </div>
+    {% endblock %}

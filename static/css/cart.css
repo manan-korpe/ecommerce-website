@@ -1,0 +1,200 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: 'Rubik', sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+button{
+    background-color: #ff8c00e6;
+    color: white;
+    border: none;
+    transition: all .30s ease;
+}
+button:hover{
+    background-color: greenyellow;
+    transform: scale(1.1);
+}
+
+/*--------------------------*/
+.main-container{
+    width: 100%;
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+table{
+    width: 100%;
+    border-spacing: 0px 20px;
+}
+
+th {
+    background-color: green;
+    color: white;
+    padding: 1vw;
+    font-size: 1.5vw;
+    font-weight: 550;
+    text-transform: capitalize;
+}
+td{
+    text-align: center;
+    font-size: 1.2vw;
+    color: rgba(0, 0, 0, 0.73);
+    padding: 5px;
+    font-weight: 400;
+    border-bottom: 1px solid #d5d5d5;
+}
+#quanity{
+    width: 40%;
+    font-size: 17px;
+    padding: 5px;
+    border: .5px solid green;
+    border-radius: 10px;
+}
+
+.product-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 15%;
+}
+.dustbin a{
+    font-size: 25px;
+    color: green;
+}
+table button{
+    background-color: transparent;
+    color: white;
+    border: none;
+    transition: all .30s ease;
+}
+table button:hover{
+    transform: scale(1.3);
+}
+.uc-button{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+}
+.button-two{
+    background-color: green;
+    color: white;
+    padding: 12px;
+    text-transform: capitalize;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    border: none;
+    transition: all .7s ease;
+    width: 100%;
+}
+.button-two:hover{
+    background-color: greenyellow;
+    transform: scale(1.1);
+}
+#empty-message{
+    padding: 5px;
+    font-size: 30px;
+    text-align: center;
+}
+
+/*---------------*/
+.second-container{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+    width: 100%;
+}
+.summery{
+    width: 30%;
+    box-shadow: 0px 2px 10px rgba(128, 128, 128, 0.844);
+    border-radius: 15px;
+    margin-top: 60px;
+    padding: 10px;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+}
+.title{
+    text-align: center;
+    font-size: 25px;
+    padding: 15px 0px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 10px rgba(128, 128, 128, 0.844) inset;
+}
+.charges{
+    font-size: 20px;
+    padding:20px 0px ;
+}
+
+.charges div{
+    display: flex;
+    justify-content: space-between;
+    margin: 3px  0px;
+}
+.total-summery div{
+    color: green;
+    margin:20px 0px;
+    font-size: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*-------------------*/
+.address{
+    border-radius: 15px;
+    margin-top:60px ;
+    padding-bottom: 15px;
+    width: 65%;
+    text-transform: capitalize;
+    box-shadow: 0px 2px 10px rgba(128, 128, 128, 0.844);
+}
+.address hr{
+    margin: 0px 20px;
+}
+.add{
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.83);
+    font-weight: 450;
+    padding: 10px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.add input[type="radio"]{
+    width: 20px;
+    height: 20px;
+    accent-color: green;
+}
+.add-text{
+    margin: 20px 0px;
+    width: 85%;
+}
+/*---------*/
+.cart-add{
+    display: flex;
+    justify-content: center;
+ }
+ .btn-add, .btn-remove{
+     color: green;
+     font-size: 20px;
+     border: 1px solid green;
+     padding: 5px;   
+     width: 30px; 
+     border-radius: 5px;
+ }
+ .cart-add button:hover{
+    color: white;
+    background-color: green;
+ }
+ input[type="text"]{
+     width: 30px;
+     text-align: center;
+     font-size: 15px;
+     padding: 5px;
+     margin: 0px 10px;
+     border-radius: 5px;
+     border: 1px solid green;
+ }

@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: 'Rubik', sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+button{
+    background-color: green;
+    color: white;
+    border: none;
+    transition: all .30s ease;
+}
+button:hover{
+    background-color: greenyellow;
+    transform: scale(1.1);
+}
+/*----------------*/
+.main-section{
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.section-one{
+    top:170px;
+    position: sticky;
+    font-size: 25px;
+    font-weight: 300;
+    text-transform: capitalize;
+    padding: 15px 30px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0px 2px 8px gray inset;
+    width: 25%;
+    height: 300px;
+}
+.profile-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid green;
+}
+.section-one button{
+    background-color: green;
+    color: white;
+    padding: 15px;
+    text-transform: capitalize;
+    margin-left: 10px;
+    border-radius: 17px;
+    font-size: 1.4rem;
+    border: none;
+    transition: all .7s ease;
+}
+.section-one button:hover{
+    background-color: greenyellow;
+    transform: scale(1.1);
+}
+.section-second{
+    padding: 20px 40px;
+    width: 100%;
+    margin-bottom: 50px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 8px gray inset;
+    text-transform: capitalize;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.info-container{
+    width: 70%;
+}
+
+.info h3{
+    font-size: 25px;
+    font-weight: 450; 
+}
+.info-input{
+    padding: 20px 0px ;
+}
+#address-info{
+    padding: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+.section-second input{
+    font-size: 20px;
+    width: 40%;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid green;
+}
+.address,textarea#id_address{
+    width: 100%;
+    height: 100px;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid green;
+    resize: none;
+}
+.update-address {
+    display: none;
+    width: 100%;
+    margin: 30px 0px;
+    border-radius: 10px;
+    padding: 20px 10px;
+    box-shadow: 0px 2px 8px green;
+    border: 1px solid green;
+}
+#id_pin_code {
+    width: 20%;
+    /* height: 40px; */
+    border-radius: 11px;
+    padding: 10px;
+    font-size: 20px;
+}
+p.details {
+    padding: 5px 0px;
+}
+input#id_address {
+    width: 90%;
+    height: 80px;
+}
+.info-input button, .sbbutton{
+    font-size: 1.4rem;
+    padding: 10px;
+    border-radius: 10px;
+    display: block;
+    margin-block: 20px;
+    text-transform: capitalize;
+}
+#submitprofileButton{
+    display: none;
+}

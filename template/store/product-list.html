@@ -1,0 +1,100 @@
+    {% extends 'base.html' %}
+
+    {% block title %}product list{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/multi-product.css' %}">
+    {% endblock %}
+
+    {% block content %}
+    
+    <section class="main-class-section">
+        <div class="filter">
+            <label for='sort'>Sort By</label>
+            <select id="sort" onchange="location = finalurl();">
+                <option disabled selected hidden>sort</option>
+                <option value="price">Price low to high</option>
+                <option value="pricedes">Price high to low</option>
+                <option value="name">Name A to Z</option>
+                <option value="nameZtoA">Name Z to A</option>
+            </select>
+        </div>
+        <div class="column-second" >
+                <div class="products" id="product-container"  >
+                    {% for p in product %}
+                    <div class="row" id="reload{{p.id}}">
+                        <a href="{% url 'product' product_id=p.id %}">
+                            <img src="{{ p.product_image.url }}" alt="anan" loading="eager|lazy">
+                        </a>
+
+                        <div class="heart-icon" >
+                           
+                                {% if p.id in like %}
+                                <i class='bx bxs-heart' id="filledheartIcon-{{p.id}}" data-product={{p.id}}></i>
+                                {% else %}
+                                <i class='bx bx-heart' id="heartIcon-{{p.id}}" data-product={{p.id}}></i>
+                                {% endif %}
+                        </div>
+                        <div class="ratting" id="total-rating" style="color:">
+                            {{p.rating}}
+                                <i class='bx {% if p.rating >= 1 %}bxs-star{% elif p.rating >= 0.5 %}bxs-star-half{% else %}bx-star{% endif %} ' ></i>
+                                <i class='bx {% if p.rating >= 2 %}bxs-star{% elif p.rating >= 1.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                                <i class='bx {% if p.rating >= 3 %}bxs-star{% elif p.rating >= 2.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                                <i class='bx {% if p.rating >= 4 %}bxs-star{% elif p.rating >= 3.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                                <i class='bx {% if p.rating >= 5 %}bxs-star{% elif p.rating >= 4.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+
+                        </div>
+                       
+                        <div class="price">
+                            <a href="{% url 'product' product_id=p.id %}">
+                                <h4>{{p.title}}</h4>
+                            </a>
+                            <p class="product-price">₹ {{p.offer_price}}</p><span style="text-decoration:line-through;font-size: 15px;color:red"> ₹{{p.price}}</span>
+                        </div>
+                        <div>
+                            {% if p.quantity == 0 %}
+                                <button type="submit" class="add-to-cart-btn out-stock" >Out Of Stock</button>
+                            {% else %}
+                                {% if user.is_authenticated %}
+                                    {% if p.id in cart_product_list %}
+                                        <a href="{% url 'cart' %}"><button type="submit" class="add-to-cart-btn" >Go to cart</button></a>
+                                    {% else %}
+                                        <button type="submit" class="add-to-cart-btn" data-product-id={{ p.id }}>Add to Cart</button>
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{% url 'login' %}"><button type="submit" class="add-to-cart-btn" >Add to Cart</button></a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if product.has_other_pages %}    
+                <div class="pagenation">
+                <div class="number">
+                    {% if product.has_previous %}
+                    <a href="?page{{product.previous_page_number}}&sort={{ request.GET.sort }}" class="prev-page" >&laquo;</a>
+                    {% endif %}
+
+                    {% for i in product.paginator.page_range %}
+                        {% if product.number == i %}
+                            <a href="#" class="active">{{i}}</a>
+                        {% else %}
+                            <a href="?page={{i}}&sort={{ request.GET.sort }}">{{i}}</a>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if product.has_next %}
+                        <a href="?page={{product.next_page_number}}&sort={{ request.GET.sort }}" class="next-page">&raquo;</a>
+                    
+                    {% endif %}
+                </div>
+                </div>
+                {% endif %}
+        </div>
+    </section>
+        
+    
+    <script src="{% static 'js/product-list.js' %}"></script>
+    {% endblock %}   

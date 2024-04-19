@@ -1,0 +1,412 @@
+    {% extends 'base.html' %}
+    {% load static %}
+
+    {% block title %}product list{% endblock %}
+
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+        <link rel="stylesheet" href="{% static 'css/order.css' %}">
+    {% endblock %}
+
+    {% block content %}
+    <div class="pic" id="pic">
+      <form method="post" class="profile-pic" enctype="multipart/form-data">
+      <button  type="button" class="close-btn" onclick="closebtn()"><i class='bx bx-x'></i></button>
+        {% csrf_token %}
+        {{ profile_form.as_p }}
+        <button type="submit" class="pic-btn">Update Profile Picture</button>
+      </form>
+    </div>
+    
+<section class="main-section">
+      <div class="hero-section-one">
+        <div class="hss">
+          <div class="section-one">
+
+            {% if custuser.user_image %}
+              <img src="{{ custuser.user_image.url }}" alt="profile photo" class="profile-img">
+            {% else %}
+              <img src="{% static '/userpro.png' %}" alt="profile photo" class="profile-img">
+            {% endif %}
+            
+              <h4>{{name}}</h4>
+              <button type="button" class="pic-dic-btn" onclick="showpicform()">Change Pic</button>
+              <a href="{% url 'changepassword' %}"><strong>Change password</strong></a>
+              <a href="{% url 'logout' %}"><button type="submit">logout</button></a>
+          </div>
+          <div class="profile-menu">
+            <button type="button" class="active pm-btn user-info" onclick="showinfo(this,'user-info')">User Information</button>
+            <button type="button" class="pm-btn proudct-Booking" onclick="showinfo(this,'order-info')">Order</button>
+            <button type="button" class="pm-btn Gardaner-Booking" onclick="showinfo(this,'gardner-info')">Gardaner Booking</button>
+          </div>
+        </div>
+      </div>
+  <div class="info-container info-active" id="user-info">
+      <div class="section-second">
+        <form action="{% url 'updateprofile' %}" id="personal-form" method="post" novalidate>
+          {% csrf_token %}
+          <div class="info">
+              <h3>personal information</h3>
+              <div class="info-input">
+                  {{ custform.first_name.errors }}
+                  {{ custform.first_name }}
+                  
+                  {{ custform.last_name.errors }}
+                  {{ custform.last_name }}
+              </div>
+          </div>
+
+          <div class="info">
+              <h3>Email adrress</h3>
+              <div class="info-input">
+                {{ custform.email.errors }}
+                {{ custform.email }}
+              </div>
+          </div>
+
+          <div class="info">
+              <h3>mobile number</h3>
+              <div class="info-input">
+                {{ custform.phone_one.errors }}
+                {{ custform.phone_one }}
+                {{ custform.phone_second.errors }}
+                {{ custform.phone_second }}
+              </div>
+          </div>
+
+          <button type="submit" class="sbbutton" id="submitprofileButton">submit</button>
+        </form>
+          <button type="submit" class="sbbutton" id="editprofileButton">edit</button>
+      </div>
+    
+      <div class="section-second add-info" id="address">
+      
+        <div class="info">
+          <h3 class="add-title">address</h3>
+          
+          {% if address %}
+            <div class="info-input" id="address-{{address.id}}">
+                <div name="add" id="add" class="address">
+                    <i class='bx bx-user-circle'></i> {{address.fname}} {{address.lname}}
+                    <br>
+                    <i class='bx bxs-phone'></i> +91 {{address.phone}}<br><br>
+                    <i class="fa-solid fa-location-dot"></i> {{address}}
+                    <div class="e-d-btn">
+                        <button type="submit" id="editButton" class="editButton">edit</button>
+                        <button onclick="deleteaddress('{{address.id}}')"  type="submit" id="editButton" class="deleteButton">Delete</button>
+                    </div>
+                </div>
+                <div class="update-address">
+                  <form  method="post" id="personal-form" action="{% url 'update_address' %}">
+                    {% csrf_token %}
+                    <div class="extra-form">
+                            {% for field in address_form %}
+                                <div class="details">{{ field.label_tag }}</div>
+                                <div class="input">{{ field }} 
+                                    <small class="error">{{ field.errors|striptags }}</small>
+                                </div>
+                            {% endfor %}
+                    </div>
+                    <button type="submit" >update</button> 
+                  </form>
+                </div>
+            </div>
+          {% else %}
+            <button type="submit" class="sbbutton" id="btn-new">new</button>
+            <div class="new-address" id="empty-form">
+              <form method="POST" action="{% url 'add_address' %}" data-parsley-validate="">
+                    {% csrf_token %} 
+                    {% for field in address_form %}
+                        <div class="extra-form">
+                            
+                                <label for="field.label_tag">{{ field.label_tag }}</label>
+                                <div class="input">{{ field }} 
+                                    <small class="error">{{ field.errors|striptags }}</small>
+                                </div>
+                            
+                        </div>
+                        {% endfor %}
+                    <button type="submit" class="sbbutton">update</button> 
+              </form>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+  </div> 
+  <div class="info-container" id="order-info">
+    <div class="order-container">
+      {% if order %}
+      {% for order in order %}
+      <div class="order-list">
+            <div class="order-list-container">
+                  <div class="one-container">
+                        <div class="order-no">Order no : {{order.id}}</div>
+                        <table>
+                              <tr>
+                                    <td>Order Date</td>
+                                    <td>: {{order.created_at}}</td>
+                              </tr>
+                              <tr>
+                                    <td>Order Status</td>
+                                    <td>: <span class="{{order.status}}">{{order.status}}</span></td>
+                              </tr>
+                              <tr>
+                                    <td>Payment<br>Method</td>
+                                    <td>
+                                    {% for p in payment %}
+                                      {% if p.order == order %}
+                                      :    {% if p.payment_method != "COD" %}
+                                            online
+                                            {% else %}
+                                                  Cash On Delivery
+                                            {% endif %}
+                                      {% endif %}
+                                    {% endfor %}
+                                    </td>
+                              </tr>
+                        </table>
+                  </div>
+                  <div class="one-container">
+                        <div class="order-no">{{order.fname}} {{order.lname}}</div>
+                        <div class="aep"> <i class="fa-solid fa-location-dot"></i> {{order.address}}, {{order.landmark}},{{order.state}}, {{order.city}}, {{order.pin_code}}</div>
+                        <div class="aep">{{user.user.email}}</div>
+                        <div class="aep"><i class='bx bxs-phone'></i> +91 {{order.phone}}</div>
+                  </div>
+            </div>
+            <div class="order-list-container-sec">
+                  <!--<div class="total det-btn"><span class="tot-span">Total item</span>: 20</div>-->
+                  <div ><a href="{% url 'order_details' orderId=order.id %}"><button type="button" class="det-btn">Details</button></a></div>
+                  {% if order.status == 'delivered' %}
+                  <div class="det-btn"><a class="dow-btn" href="{% url 'invoice' orderid=order.id %}" download>Download Invoice</a></div>
+                  {% endif %}
+            </div>
+      </div>
+      {% endfor %}
+      {% else%}
+      <div class="order-list">
+            <div class="order-list-container" style="text-align: center; justify-content: center;font-size: 20px;
+            padding: 20px;">
+                  <div class="one-container">
+                  no Order Found
+                  </div>
+            </div>
+          <div style="padding: 10px;display: flex;justify-content: center;">
+            <a href="{% url 'productList' %}">Order Now</a>
+          </div>
+      </div>
+      {% endif %}
+</div>
+  </div>
+  <div class="info-container" id="gardner-info">
+    <div class="order-container">
+      {% if booking %}
+      {% for order in booking %}
+      <div class="order-list">
+            <div class="order-list-container">
+                  <div class="one-container">
+                        <div class="order-no">Booking no : {{order.id}}</div>
+                        <table>
+                              <tr>
+                                    <td>Service</td>
+                                    <td>: {{order.service_name.title}} ( {{order.service_name.service}})
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td>Date</td>
+                                    <td>: {{order.booking_date}}</td>
+                              </tr>
+                              <tr>
+                                    <td>Time</td>
+                                    <td>: {{order.booking_time|time:"h"}}:{{order.booking_time|time:"i"}} {{order.booking_time|time:"A"}}</td>
+                              </tr>
+                              <tr>
+                                    <td>Charges</td>
+                                    <td >: {{order.service_offer_amount}}
+                                    <span style="font-size: 12  px;text-decoration: line-through;color:red;">₹ {{order.service_amount}}</span>
+                                    </td>
+                              </tr>
+                              
+                        </table>
+                  </div>
+                  <div class="one-container">
+                        <div class="order-no">{{order.fname}} {{order.lname}}</div>
+                        <div class="aep"> <i class="fa-solid fa-location-dot"></i> {{order.area}},{{order.city}},{{order.state}},{{order.pin_code}}</div>
+                        <div class="aep"><i class='bx bxs-envelope'></i> {{order.email}}</div>
+                        <div class="aep"><i class='bx bxs-phone'></i> +91 {{order.phone}}</div>
+                  </div>
+            </div>
+            <div class="order-list-container-sec">
+                  <div class="det-btn {{order.status}}">{{order.status}}</div>
+            </div>
+      </div>
+      {% endfor %}
+      {% else%}
+      <div class="order-list">
+            <div class="order-list-container" style="text-align: center; justify-content: center;font-size: 20px;
+            padding: 20px;">
+                  <div class="one-container">
+                  no Booking Found
+                  </div>
+            </div>
+          <div style="padding: 10px;display: flex;justify-content: center;">
+            <a href="{% url 'gardnerlist' %}">Book Now</a>
+          </div>
+      </div>
+      {% endif %}
+</div>
+  </div>
+</section>
+    <script src="{% static 'js/profile.js' %}"></script>
+    <script>
+    
+      function cgnp(req,res){
+            var selectedcity = $(req).val();
+            $.ajax({
+            url: "/get_pin/",
+            type: "GET",
+            data: { city_id : selectedcity },
+            success: function(data) {
+                  console.log(data);
+                  var cd = $(res);
+                  console.log(cd);
+                  $(res).empty();
+                  $(res).append('<option value="" selected>Pincode</option>');
+                  $.each(data, function(key, value) {
+                        $(res).append('<option value="' + value + '">' + value + '</option>');
+                  });
+            }
+            });
+      }
+      function cgnc(req,res){
+            var selectedstate = $(req).find('option:selected').text();
+            console.log(selectedstate);
+            $.ajax({
+            url: "/get_cities/",
+            type: "GET",
+            data: { state_id : selectedstate },
+            success: function(data) {
+                  console.log(data);
+                  var cd = $(res);
+                  console.log(cd);
+                  $(res).empty();
+                  $(res).append('<option value="" selected>City</option>');
+                  $.each(data, function(key, value) {
+                        $(res).append('<option value="' + value + '">' + value + '</option>');
+                  });
+            }
+            });
+      }
+    </script>
+    <style>
+                              .new-address{
+                              display: none;
+                              width: 100%;
+                              margin: 30px 0px;
+                              border-radius: 10px;
+                              padding: 20px 10px;
+                              box-shadow: 0px 2px 8px green;
+                              border: 1px solid green;
+                          }
+                  textarea{
+                        width: 100%;
+                        height: 100px;
+                        font-size: 20px;
+                        padding: 10px;
+                        border-radius: 10px;
+                        border: 2px solid green;
+                        resize: none;
+                    }
+                    select {
+                        width: 20%;
+                        /* height: 40px; */
+                        border-radius: 11px;
+                        padding: 10px;
+                        font-size: 20px;
+                    }
+    </style>
+    <style>
+      .pic {
+        display:none;
+          position: fixed;
+          width: 100%;
+          height: 100%;
+          top: 0%;
+          z-index: 1000;
+          background-color: #80808078;
+      }
+      form.profile-pic {
+          width: 50%;
+          /* height: 30%; */
+          padding: 10px;
+          border-radius: 10px;
+          border: 2px solid green;
+          position: relative;
+          top: 25%;
+          left: 35%;
+          background-color: white;
+      }
+      .pic-btn {
+          padding: 5px;
+          margin-top: 10px;
+          border-radius: 5px;
+      }
+      button.pic-dic-btn{
+          background-color: white;
+          font-size: 15px;
+          color: green;
+          border: 1px solid;
+          padding: 5px;
+          margin: 5px 0px;
+      }
+
+    </style>
+    <style>
+      .info-active{
+        display: block;
+      }
+      
+            #gardner-info .det-btn{
+                  border-radius: 5px;
+                  background-color:white;
+                  padding:  5px 10px;
+                  font-weight: 600;
+                  text-transform: capitalize;
+                  margin-top:5px ;
+            }
+            #gardner-info .pending{
+                  border: 1px solid rgb(221, 136, 0);
+                  color:rgb(221, 136, 0);
+            }
+            #gardner-info .completed{
+                  border: 1px solid green;
+                  color:green;
+            }
+            #gardner-info .cancelled{
+                  border: 1px solid red;
+                  color:red;
+            }
+    </style>
+    <script>
+      function showinfo(btn,valid){
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        var pmbtn = document.getElementsByClassName("pm-btn");
+
+        for(var i=0; i<pmbtn.length; i++){
+          pmbtn[i].classList.remove('active');
+        }
+
+        btn.classList.add('active');
+
+        var con = document.getElementsByClassName("info-container");
+
+        for(var i=0; i<con.length; i++){
+          
+          con[i].classList.remove('info-active');
+          console.log(con[i]);
+        }
+        var infocon = document.getElementById(valid);
+        
+        infocon.classList.add('info-active');
+      }
+    </script>
+    {% endblock %}

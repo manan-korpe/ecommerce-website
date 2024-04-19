@@ -1,0 +1,248 @@
+    {% extends 'base.html' %}
+
+    {% block title %}product list{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/product.css' %}">
+    {% endblock %}
+
+    {% block content %}
+
+    <section class="single-product">
+        <div class="product-info">
+            <div class="product-image">
+                
+                <div class="img-div">
+                    <div class="img-container">
+                        {% if product.product_image != None %}
+                        <img src="{{ product.product_image.url }}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="hover-image">
+                        
+                        {% for images in images %}
+                            <div>
+                            {% if product.product_image != None %}
+                                <img src="{{ product.product_image.url }}" alt="not2">
+                            {% endif %}
+                            </div>
+                            <div>
+                            {% if images.img1 %}
+                                <img src="{{ images.img1.url }}" alt="not">
+                            {% endif %}
+                            </div>
+                            <div>
+                            {% if images.img2 %}
+                                <img src="{{ images.img2.url }}" alt="not">
+                            {% endif %} 
+                            </div>
+                            <div>
+                            {% if images.img3 %}
+                                <img src="{{ images.img3.url }}" alt="not">
+                            {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="product-details">
+                <div class="product-name">
+                    <h3>{{product.title}}</h3>
+                </div>
+                <div class="rating" id="total-rating">
+                    {{product.rating}}
+                        <i class='bx {% if product.rating >= 1 %}bxs-star{% elif product.rating >= 0.5 %}bxs-star-half{% else %}bx-star{% endif %} ' ></i>
+                        <i class='bx {% if product.rating >= 2 %}bxs-star{% elif product.rating >= 1.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                        <i class='bx {% if product.rating >= 3 %}bxs-star{% elif product.rating >= 2.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                        <i class='bx {% if product.rating >= 4 %}bxs-star{% elif product.rating >= 3.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                        <i class='bx {% if product.rating >= 5 %}bxs-star{% elif product.rating >= 4.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+
+                </div>
+                <div class="price">
+                    ₹ {{product.offer_price}} <span style="text-decoration:line-through;font-size: 18px;"> ₹{{product.price}}</span>
+                </div>
+                <div class="chargis">
+                    <ul>
+                        <h5>MRP inclusive of all taxes</h5>
+                        <li>shipping <span>₹ {{product.shipping_charges}}</span> for entire order</li>
+                        <li>pay on delivery</li>
+                        <li><span>10</span>day Exchange & Replacement</li>
+                        <li>Secure transaction</li>
+                    </ul>
+                </div>
+                <div class="cart-bn">
+                    <div class="cart" id="reload{{product.id}}">
+                    {% if product.quantity == 0 %}
+                                <button type="submit" class="add-to-cart-btn out-stock" >Out Of Stock</button>
+                    {% else %}
+                            {% if user.is_authenticated %}
+                                {% if cart_product %}
+                                    <a href="{% url 'cart' %}"><button type="submit" class="add-to-cart-btn" >Go to cart</button></a>
+                                {% else %}
+                                    <button type="submit" class="add-to-cart-btn" data-product-id={{ product.id }}>Add to Cart</button>
+                                {% endif %}
+                            {% else %}
+                                <a href="{% url 'login' %}"><button type="submit" class="add-to-cart-btn" >Add to Cart</button></a>
+                            {% endif %}
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="offer">
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="product-second-info">
+            <div class="product-data">
+                <h3>Product Details</h3>
+                <table>
+                    {% for field_name, field_value in specifications.items %}
+                        <tr>
+                            <td><h5>{{ field_name }}</h5></td>
+                            <td>{{field_value}}</td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+            <div class="care-tip">
+                <table>
+                    <h3>Product Care Tips</h3>
+                    {% for field_name, field_value in care.items %}
+                    <tr>
+                        <td><h5>{{ field_name }}</h5></td>
+                        <td>{{field_value}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="comment" id="comment">
+            <div class="title">
+                <h2>Rating & Reviews</h2>
+                {% if status %}
+                    {% if not review %}
+                    <button type="button" onclick="formdisply()" class="ratting" id="ratting-btn">Rate Product</button>
+                    {% endif %}
+                {% endif %}
+                <div class="rate-container" id="rate-container">
+                    <div class="ratting-form">
+                        <div class="rate-sub">
+                            <button class="close-btn" onclick="closebtn()"><i class='bx bx-x'></i></button>
+                        </div>
+                        <div class="rate">
+                            <div class="title">Rate</div>
+                            <div class="rating user-ratting">
+                            
+                                <i class='bx bx{% if review.rating >= 1%}s{% endif %}-star' onclick="fillStars(this, 0)"></i>
+                                <i class='bx bx{% if review.rating >= 2%}s{% endif %}-star' onclick="fillStars(this, 1)"></i>
+                                <i class='bx bx{% if review.rating >= 3%}s{% endif %}-star' onclick="fillStars(this, 2)"></i>
+                                <i class='bx bx{% if review.rating >= 4%}s{% endif %}-star' onclick="fillStars(this, 3)"></i>
+                                <i class='bx bx{% if review.rating >= 5%}s{% endif %}-star' onclick="fillStars(this, 4)"></i>
+        
+                        <form method="post" id="ratting-from">
+                                {% csrf_token %}
+                                <input type="hidden" name="ratting"  id="rattingvalue" value="0">
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="title">Comment</div>
+                            <textarea name="comment" id="comment" cols="30" rows="10">{{review.content}}</textarea>
+                            <input type="hidden" name="productid" value="{{product.id}}">
+                        </div>
+                        <div class="rate-sub">
+                            <button type="submit" class="ratting">Rate Now</button>
+                        </div>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+            
+            {% for item in rated %}
+            <div class="view-ratting">
+                <div class="user-name">
+                    <div class="user-img">
+                        <img src="{{ item.user.user_image.url }}" alt="" class="user-photo">
+                    </div>
+                    <h4>{{item.user.user.first_name}} {{item.user.user.last_name}} </h4>
+                    <div class="rating">
+                        <i class='bx bx{% if item.rating >= 1%}s{% endif %}-star'></i>
+                        <i class='bx bx{% if item.rating >= 2%}s{% endif %}-star'></i>
+                        <i class='bx bx{% if item.rating >= 3%}s{% endif %}-star'></i>
+                        <i class='bx bx{% if item.rating >= 4%}s{% endif %}-star'></i>
+                        <i class='bx bx{% if item.rating >= 5%}s{% endif %}-star'></i>
+                    </div>
+                </div>
+                <div class="view-comment">
+                   {{item.content}}
+                </div>
+                {% if request.user.pk == item.user.user.pk %}
+                <button type="button" onclick="formdisply()" class="update-rate" id="ratting-btn">Update ratting</button>
+                <button type="button" id="delete-rate" onclick="deleteratind({{product.id}})" class="update-rate"  style="background-color:red">Delete</button>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!--product sectionn one  start-->
+    <section class="trending-product" id="trending">
+    
+         <div class="center-text">
+        <h2>Top selling<span>Product</span></h2>
+         </div>
+        
+        <div class="products">
+        {% for p in related_product_list|slice:":4" %}
+                    <div class="row" id="reload{{p.id}}">
+                        <a href="{% url 'product' product_id=p.id %}">
+                            <img src="{{ p.product_image.url }}" alt="anan" loading="eager|lazy">
+                        </a>
+
+                        <div class="heart-icon" >
+                           
+                                {% if p.id in like %}
+                                <i class='bx bxs-heart' id="filledheartIcon-{{p.id}}" data-product={{p.id}}></i>
+                                {% else %}
+                                <i class='bx bx-heart' id="heartIcon-{{p.id}}" data-product={{p.id}}></i>
+                                {% endif %}
+                        </div>
+            
+                        <div class="trratting">
+                            <i class='bx {% if p.rating >= 1 %}bxs-star{% elif p.rating >= 0.5 %}bxs-star-half{% else %}bx-star{% endif %} ' ></i>
+                            <i class='bx {% if p.rating >= 2 %}bxs-star{% elif p.rating >= 1.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                            <i class='bx {% if p.rating >= 3 %}bxs-star{% elif p.rating >= 2.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                            <i class='bx {% if p.rating >= 4 %}bxs-star{% elif p.rating >= 3.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                            <i class='bx {% if p.rating >= 5 %}bxs-star{% elif p.rating >= 4.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+
+                        </div>
+                        <div class="trprice">
+                            <a href="{% url 'product' product_id=p.id %}">
+                                <h4>{{p.title}}</h4>
+                            </a>
+                            <p class="product-price">{{p.price}}</p>
+                        </div>
+                        <div>
+                            {% if p.quantity == 0 %}
+                                <button type="submit" class="add-to-cart-btn out-stock" >Out Of Stock</button>
+                            {% else %}
+                                {% if user.is_authenticated %}
+                                    {% if p.id in cart_product_list %}
+                                        <a href="{% url 'cart' %}"><button type="submit" class="add-to-cart-btn" >Go to cart</button></a>
+                                    {% else %}
+                                        <button type="submit" class="add-to-cart-btn" data-product-id={{ p.id }}>Add to Cart</button>
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{% url 'login' %}"><button type="submit" class="add-to-cart-btn" >Add to Cart</button></a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+        {% endfor %}
+        
+        </div>
+    </section>
+    <script src="{% static 'js/product-list.js' %}"></script>
+    {% endblock %}

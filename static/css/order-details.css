@@ -1,0 +1,95 @@
+*{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Rubik', sans-serif;
+      list-style: none;
+      text-decoration: none;
+      text-transform: capitalize;
+}
+.order-details{
+      padding: 0px 20px;
+}
+.id-date{
+      display: flex;
+      justify-content: space-between;
+}
+.title, .date{
+      font-weight: 500;
+      padding:20px 0px;
+      font-size: 1.6vw;
+}
+.title span{
+      color: green;
+}
+.product-details{
+      width: 100%;
+      padding: 2vw;
+}
+.product-details{
+      width: 100%;
+      border-collapse: collapse;
+}
+.product-details th{
+      color: white;
+      background-color: green;
+      padding: 10px;
+      font-size: 1.6vw;
+      font-weight: 500;
+}
+.product-details td{
+      text-align: center;
+      padding: 10px;
+      font-size: 1.4dvw;
+      color: rgb(0, 0, 0);
+      border-bottom: 1px solid gray;
+}
+.product-details td:last-child,.product-details td:nth-child(4){
+      font-weight: 500;
+      color: green;
+}
+.product-image{
+      width: 6vw;
+      height: 6vw;
+      border-radius: 5px;
+}
+.order-details-second{
+      margin-top: 10px;
+}
+.shipping-billing, .payable{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+}
+.shipping, .price-charges, .method{
+      flex: 1 0 300px;
+}
+.sbtitle, .ptitle{
+      color: white;
+      background-color: green;
+      font-size: 1.5vw;
+      padding: 5px;
+      margin-top: 20px;
+      border-bottom: 1px solid green;
+      border-radius: 5px 5px 0px 0px;
+}
+.address, .charges, .total, .method-details{
+      font-size: 1.4vw;
+      padding: 5px;
+      border: 1px solid green;
+      border-radius: 0px 0px 5px 5px;
+}
+
+.sub-col, .total{
+      margin: 3px 0px;
+      display: flex;
+      justify-content: space-between;
+}
+.price{
+      font-weight: 500;
+}
+.total{
+      color: white;
+      background-color: green;
+}

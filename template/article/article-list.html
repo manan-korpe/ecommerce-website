@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+    {% block title %}Article list{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/article-list.css' %}">
+    {% endblock %}
+
+    {% block content %}
+         <section class="main-class-section">
+        <div class="filter">
+            <label for="sort">sort by</label>
+            <select id="sort" onchange="sortProducts()">
+                <option value="default">Default</option>
+                <option value="name">Name A to Z</option>
+                <option value="nameZtoA">Name Z to A</option>
+            </select>
+        </div>
+            <div class="blog" id="product-container">
+            {% for article in articleld %}
+                <div class="row">
+                    <a href="{% url 'showarticle' article_id=article.id %}"><img src="{{ article.image.url }}" alt="a" loading="lazy"></a>
+                    <div class="blog-text">
+                        <h4>{{article.title}}</h4>
+                        <a href="{% url 'showarticle' article_id=article.id %}"><p>view</p></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% if articleld.has_other_pages %}
+                <div class="pagenation">
+                <div class="number">
+                    {% if articleld.has_previous %}
+                    <a href="?page{{articleld.previous_page_number}}" class="prev-page" >&laquo;</a>
+                    {% endif %}
+
+                    {% for i in articleld.paginator.page_range %}
+                        {% if articleld.number == i %}
+                            <a href="#" class="active">{{i}}</a>
+                        {% else %}
+                            <a href="?page={{i}}">{{i}}</a>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if product.has_next %}
+                        <a href="?page={{articleld.next_page_number}}" class="next-page">&raquo;</a>
+                    
+                    {% endif %}
+                </div>
+                </div>
+                {% endif %}
+         </section>
+    <script src="{% static 'js/article-list.js' %}"></script>
+    {% endblock %}

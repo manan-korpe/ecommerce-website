@@ -1,0 +1,198 @@
+    {% extends 'base.html' %}
+
+    {% block title %}Home{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    {% endblock %}
+
+    {% block content %}
+
+  <!--slid start-------------------------------------------------->
+    <div id="slider-container">
+        <ul id="image-list">
+            <li><a href="{% url 'gardnerlist' %}"> <img src="{% static '/gardner.png' %}" alt="Image 1" class="slider-image"></a></li>
+            <li><a href="{% url 'productList' category_id=0 %}"></a><img src="{% static '/product.png' %}" alt="Image 2" class="slider-image"></a></li>
+            <li><a href="{% url 'productList' category_id=0 %}"></a><img src="{% static '/s3.png' %}" alt="Image 3" class="slider-image"></a></li>
+        </ul>
+        <button id="prev-btn" class="slider-btn" onclick="prevSlide()">❮</button>
+        <button id="next-btn" class="slider-btn" onclick="nextSlide()">❯</button>
+    </div>
+  <!--slider end-->
+  
+  <!--service start -------------------------------------------------->
+  <section class="grid4">
+    <div class="detail-grid">
+        <div class="grid-one">
+            <i class='bx bxs-offer'></i>
+            <span>offer</span>
+        </div>
+        <div class="grid-second">
+            <i class='bx bx-package'></i>
+            <span>safe package</span>
+        </div>
+        <div class="grid-thired">
+            <i class='bx bx-street-view'></i>
+            <span>Gardener</span>
+        </div>
+        <div class="grid-fourth">
+            <i class='bx bxs-truck'></i>
+            <span>track order</span>
+
+        </div>
+    </div>
+  </section>
+   <!--service end -->
+
+    <!--product start-------------------------------------------------->
+  <section class="trending-product" id="trending">
+    <div class="center-text">
+        <h2>Plant<span>Products</span></h2>
+    </div>
+    <div class="products op">
+
+        {% for product in product|slice:":4" %}
+        
+        <div class="row opr" id="reload{{product.id}}">
+        <a href="{% url 'product' product_id=product.id %}">
+            <img src="{{ product.product_image.url }}" alt="">
+        </a>
+            <div class="heart-icon">
+                
+                {% if product.id in like %}
+                    <i class='bx bxs-heart' id="filledheartIcon-{{product.id}}" data-product={{product.id}}></i>
+                {% else %}
+                    <i class='bx bx-heart' id="heartIcon-{{product.id}}" data-product={{product.id}}></i>
+                {% endif %}
+            
+            </div>
+            <div class="ratting" id="total-rating">
+                    {{product.rating}}
+                        <i class='bx {% if product.rating >= 1 %}bxs-star{% elif product.rating >= 0.5 %}bxs-star-half{% else %}bx-star{% endif %} ' ></i>
+                        <i class='bx {% if product.rating >= 2 %}bxs-star{% elif product.rating >= 1.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                        <i class='bx {% if product.rating >= 3 %}bxs-star{% elif product.rating >= 2.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                        <i class='bx {% if product.rating >= 4 %}bxs-star{% elif product.rating >= 3.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                        <i class='bx {% if product.rating >= 5 %}bxs-star{% elif product.rating >= 4.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+
+                </div>
+            <div class="price">
+                <a href="{% url 'product' product_id=product.id %}"><h4>{{product.title}}</h4></a>
+                <p>₹ {{product.price}}</p>
+            </div>
+            {% if product.quantity == 0 %}
+                <button type="submit" class="add-to-cart-btn out-stock" >Out Of Stock</button>
+            {% else %}
+                {% if user.is_authenticated %}
+                    {% if product.id in cart_product_list %}
+                        <a href="{% url 'cart' %}"><button type="submit" class="add-to-cart-btn" >Go to cart</button></a>
+                    {% else %}
+                        <button type="submit" class="add-to-cart-btn" data-product-id={{ product.id }}>Add to Cart</button>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'login' %}"><button type="submit" class="add-to-cart-btn" >Add to Cart</button></a>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        {% endfor %}
+    </div>
+  </section>
+  <!--product end-->
+
+  <!--gardnerstart------------------------------------------------->
+  <div class="center-text">
+    <h2>Gardner<span>Offer</span></h2>
+  </div>
+  <div class="gardner">
+    <div class="row">
+        <a href="{% url 'gardnerlist' %}"><img src="{% static '/GHiring.png' %}" alt=""></a>
+    </div>
+    <div class="row">
+        <a href="{% url 'gardnerlist' %}"><img src="{% static '/abcd.png' %}" alt=""></a>
+    </div>
+  </div>
+  <!--gardner  end-->
+  <!--product start-------------------------------------------------->
+  <section class="trending-product" id="trending">
+    <div class="center-text">
+        <h2>New<span>Products</span></h2>
+    </div>
+    <div class="products op">
+        {% for product in new_product|slice:":4" %}
+        <div class="row opr" id="reload{{product.id}}">
+        <a href="{% url 'product' product_id=product.id %}">
+            <img src="{{ product.product_image.url }}" alt="">
+        </a>
+            <div class="heart-icon">
+                
+                {% if product.id in like %}
+                    <i class='bx bxs-heart' id="filledheartIcon-{{product.id}}" data-product={{product.id}}></i>
+                {% else %}
+                    <i class='bx bx-heart' id="heartIcon-{{product.id}}" data-product={{product.id}}></i>
+                {% endif %}
+            
+            </div>
+            <div class="ratting" id="total-rating">
+                    {{product.rating}}
+                        <i class='bx {% if product.rating >= 1 %}bxs-star{% elif product.rating >= 0.5 %}bxs-star-half{% else %}bx-star{% endif %} ' ></i>
+                        <i class='bx {% if product.rating >= 2 %}bxs-star{% elif product.rating >= 1.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                        <i class='bx {% if product.rating >= 3 %}bxs-star{% elif product.rating >= 2.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                        <i class='bx {% if product.rating >= 4 %}bxs-star{% elif product.rating >= 3.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                        <i class='bx {% if product.rating >= 5 %}bxs-star{% elif product.rating >= 4.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+
+                </div>
+            <div class="price">
+                <a href="{% url 'product' product_id=product.id %}"><h4>{{product.title}}</h4></a>
+                <p>₹ {{product.price}}</p>
+            </div>
+            {% if product.quantity == 0 %}
+                <button type="submit" class="add-to-cart-btn out-stock" >Out Of Stock</button>
+            {% else %}
+                {% if user.is_authenticated %}
+                    {% if product.id in cart_product_list %}
+                        <a href="{% url 'cart' %}"><button type="submit" class="add-to-cart-btn" >Go to cart</button></a>
+                    {% else %}
+                        <button type="submit" class="add-to-cart-btn" data-product-id={{ product.id }}>Add to Cart</button>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'login' %}"><button type="submit" class="add-to-cart-btn" >Add to Cart</button></a>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        {% endfor %}
+    </div>
+  </section>
+  <!--product end-->
+
+<!--2 product template start-------------------------------------------------->
+  <div class="center-text">
+    <h2>Popular in<span>2024</span></h2>
+  </div>
+  <div class="desc">
+    <div class="row">
+        <a href="http://127.0.0.1:8000/productList/4"><img src="{% static '/pro1.png' %}" alt=""></a>
+    </div>
+    <div class="row">
+    <a href="{% url 'ShowArticleList' %}"><img src="{% static '/pro2.png' %}" alt=""></a>
+    </div>
+  </div>
+<!--2 product template end-->
+<!--article start-------------------------------------------------->
+  <div class="center-text">
+    <h2>From The<span>Articles</span></h2>
+  </div>
+  <div class="blog">
+  {% for article in article|slice:":3" %}
+    <div class="row">
+        <img src="{{ article.image.url }}" alt="">
+        <div class="blog-text">
+            <a href="{% url 'showarticle' article_id=article.id %}"><h4>{{article.title}}</h4></a>
+            <a href="{% url 'showarticle' article_id=article.id %}">view more</a>
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+<script src="{% static 'js/slider.js' %}"></script>
+{% endblock %}

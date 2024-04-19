@@ -1,0 +1,43 @@
+{% load static %}
+<footer>
+<section class="contact">
+        <div class="contact-info">
+            <div class="first-info">
+                <img src="{% static '/hvx4d7i6.png' %}" alt="">
+                <span>abc institute,<br> </span>
+                <span>9263744236</span>
+                <p>abc@gmail.com</p>
+            </div>
+            <div class="second-info">
+                <h4>Support</h4>
+            <p><a href="{% url 'aboutUs' %}">AboutUs</a></p>
+            <p><a href="{% url 'contact' %}">Contact</a></p>
+                
+            </div>
+            <div class="third-info">
+                <h4>Products </h4>
+                <p><a href="{% url 'productList' category_id=1 %}">Plant</a></p>
+                <p><a href="{% url 'productList' category_id=4 %}">Accessory</a></p>
+                <p><a href="{% url 'productList' category_id=3 %}">fertilizer</a></p>
+            </div>
+            <div class="fourth-info">
+                <h4>Services</h4>
+                <p><a href="{% url 'productList' %}">Product</a></p>
+                <p><a href="{% url 'gardnerlist' %}">Gardner</a></p>
+                <p><a href="{% url 'ShowArticleList' %}">Article</a></p>
+            </div>
+            <style>
+                .contact-info a{
+                    color:rgb(96, 96, 96);
+                }
+            </style>
+            <div class="fifth-info">
+                <h4>Subscribe</h4>
+                <span>Recive Update , Hot deals, Discounts sent Straight in your inbox</span>
+            </div>
+        </div>
+    </section>
+    <div class="end-text">
+        <span>Copyright © 2024 . All Rights Reserved.Designd By Green Heaven Nursey</span>
+    </div>
+</footer>

@@ -1,0 +1,274 @@
+/* Default styles */
+
+.order-container{
+      width: 100%;
+      padding: 20px;
+}
+.order-container a{
+      color: green;
+}
+.order-list{
+      margin-bottom: 20px;
+      padding: 15px;
+      width: 100%;
+      border-radius: 5px;
+      box-shadow: 0px 1px 5px rgb(173, 172, 172);
+}
+.order-list-container{
+      background-color: gainsboro;
+      padding: 10px;
+      border-radius: 5px;
+      display: flex;
+      gap: 30%;
+}
+.order-no{
+      padding: 10px 0px;
+      font-size: 20px;
+      font-weight: 700;
+}
+.one-container {
+      width: 400px;
+}
+td{
+      color: rgb(103, 102, 102);
+      padding: 3px 0px;
+}
+td:nth-child(even){
+      padding-left: 30px;
+}
+.aep{
+      padding: 5px 0px;
+      color: rgb(103, 102, 102);
+}
+.order-list-container-sec{
+      padding: 10px;
+      display: flex;
+      gap: 30%;
+}
+.tot-span{
+      color: black;
+}
+.det-btn{
+      border-radius: 5px;
+      background-color:white;
+      padding:  5px 10px;
+      font-weight: 600;
+      text-transform: capitalize;
+      margin-top:5px ;
+}
+.pending{
+      border: 1px solid rgb(221, 136, 0);
+      color:rgb(221, 136, 0);
+}
+.completed{
+      border: 1px solid green;
+      color:green;
+}
+.cancelled{
+      border: 1px solid red;
+      color:red;
+}
+
+  @media (max-width: 768px) {
+      .order-list-container,
+      .order-list-container-sec {
+          gap: 10px; /* Reduce the gap between items */
+      }
+  
+      .one-container {
+          width: 100%; /* Make the container full width on smaller screens */
+      }
+  
+      td:nth-child(even) {
+          padding-left: 10px; /* Reduce left padding for table cells */
+      }
+  }
+  
+  @media (max-width: 576px) {
+      .order-list-container,
+      .order-list-container-sec {
+          flex-direction: column; /* Stack items vertically */
+      }
+  
+      .order-list {
+          width: 100%; /* Make the order list full width */
+      }
+  }
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Inter", Arial, Helvetica, sans-serif;
+    }
+    .booking{
+      display:flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .bookig-container-form{
+      width:55%;
+      border-radius: 8px;
+      border:1px solid green;
+    }
+    .gardner-container-form{
+      top: 130px;
+      position: sticky;
+      width:40%;
+      height: fit-content;
+      padding:20px;
+      border-radius: 8px;
+      border:1px solid green;
+    }
+  
+    table{
+      width: 100%;
+      border-spacing: 0px;
+    }
+    td {
+      padding: 10px 10px 5px 10px;
+      border: 1px solid rgb(190, 190, 190);
+      background: white;
+      font-weight: 500;
+      font-size: 16px;
+      color: #151515;
+    }
+    td:nth-child(odd){
+      border-radius: 8px 0px 0px 8px;
+      border-right: 0px;
+    }
+    td:nth-child(even){
+      border-radius: 0px 8px 8px 0px;
+      border-left: 0px;
+      text-align: right;
+    }
+    .formbold-mb-5 {
+      margin-bottom: 20px;
+    }
+    .formbold-pt-3 {
+      padding-top: 12px;
+    }
+    .formbold-main-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .formbold-main-wrapper-slot {
+      display: flex;
+      padding-bottom: 8px;
+      gap: 5px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .formbold-form-wrapper {
+      margin: 0 auto;
+      max-width: 550px;
+      width: 100%;
+      background: white;
+    }
+    .formbold-form-label {
+      display: block;
+      font-weight: 500;
+      font-size: 16px;
+      color: #07074d;
+      margin-bottom: 12px;
+    }
+    .formbold-form-label-2 {
+      font-weight: 600;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+  
+    .formbold-form-input {
+      width: 100%;
+      padding: 12px 24px;
+      border-radius: 6px;
+      border: 1px solid green;
+      background: white;
+      font-weight: 500;
+      font-size: 16px;
+      color: #6b7280;
+      outline: none;
+      resize: none;
+    }
+    .formbold-form-input-slot {
+      width: 50%;
+      padding: 12px 24px;
+      border-radius: 6px;
+      border: 1px solid green;
+      background: white;
+      font-weight: 500;
+      font-size: 16px;
+      color: #6b7280;
+      outline: none;
+      resize: none;
+    }
+    .formbold-form-input:focus {
+      border-color: #6a64f1;
+      box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+    }
+  
+    .formbold-btn {
+      text-align: center;
+      font-size: 16px;
+      border-radius: 6px;
+      padding: 14px 32px;
+      border: none;
+      font-weight: 600;
+      background-color: green;
+      color: white;
+      width: 100%;
+      cursor: pointer;
+    }
+    .formbold-btn:hover {
+      box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+      
+    }
+  
+    .formbold--mx-3 {
+      margin-left: -12px;
+      margin-right: -12px;
+    }
+    .formbold-px-3 {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    .flex {
+      display: flex;
+    }
+    .flex-wrap {
+      flex-wrap: wrap;
+    }
+    .w-full {
+      width: 100%;
+    }
+    @media (min-width: 540px) {
+      .sm\:w-half {
+        width: 50%;
+      }
+    }
+    .selected {
+                    background-color: green;
+                    color:white;
+                }
+    .not-avl {
+      background-color: #837979;
+      color: white;
+      }
+      .not-avl:hover{
+        background-color: #837979;
+        color:red;
+      }
+      .title{
+      background-color: green;
+      color: white;
+      border-radius: 8px;
+      padding: 10px 24px;
+      text-align: center;
+      font-size: 20px;
+    }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <title>BOOKING CONFIRMATION...!</title>
+</head>
+<body>
+<h3>Hello {{booking_instance.gardner.name}} Your {{booking_instance.gardner.service.title}} Details are:-</h3>
+<br>Customer Name:-{{booking_instance.fname}} {{booking_instance.lname}}
+<br>Service date:-{{booking_instance.booking_date}}
+<br>Service Time:-{{booking_instance.booking_time|time:"h"}}:{{booking_instance.booking_time|time:"i"}} {{booking_instance.booking_time|time:"A"}}
+<br>Customer Phone:-{{booking_instance.phone}}
+<br>Customer Email:-{{booking_instance.email}}
+<br>Service Place(address):-{{booking_instance.area}},{{booking_instance.city}},{{booking_instance.state}},{{booking_instance.pin_code}}
+
+
+</body>
+</html>

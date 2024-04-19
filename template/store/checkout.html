@@ -1,0 +1,354 @@
+    {% extends 'base.html' %}
+
+    {% block title %}checkout{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+    {% endblock %}
+
+    {% block content %}
+     <div class="progress-bar">
+            <ul class="progress">
+                  <li class="active">Shipping</li>
+                  <li>Order Summery</li>
+                  <li >Payment</li>
+            </ul>
+      </div>
+      {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+      <section id="checkout-container" >
+            <div class="col-one" >
+            
+                  <div class="shiping-form-container" id="shiping-form-container">
+                              <div id="error"></div>
+                        <div class="title">
+                                    <h4>Shipping address</h4>
+                        </div>
+                        <div class="address-select">
+                              {% if shipping_address %}
+                              {% for address in shipping_address %}
+                                    <div class="address-details">
+                                          <div class="address-dispay">
+                                                <i class='bx bx-user-circle'></i> {{user.user.first_name}} {{user.user.last_name}}<br>
+                                                <i class='bx bxs-phone'></i> {{user.phone_one}}<br><br>
+                                                <i class="fa-solid fa-location-dot"></i> {{address}}
+                                          </div>
+                                          <!--<button type="button" id="edit" onclick="editbtn()">Edit</button>-->
+                                          <button type="button" id="new" onclick="newbtn()">new</button>
+                                          <button type="button" id="cln" onclick="clnbtn()">cancel</button>
+                                    </div> 
+                              {% endfor %} 
+                              {% else %}
+                                    <button type="button" class="hide" id="new" onclick="newbtn()">new</button>   
+                              {% endif %}                         
+                        </div>
+                        <form method="POST" action="{% url 'checkout' %}" id="order" >    
+                        {% csrf_token %}
+                        <div class="shiping-form" {% if shipping_address %} id="shiping-form" {% endif %}>
+                              <div class="fname sstep">
+                                    
+                                    <label for="fname">first name</label>
+                                    <input type="text" name="fname" id="sfname" placeholder="first name" >
+                                    <div class="error status" id="fname-error"></div>
+                              </div>
+                              <div class="lname sstep">
+                                    <label for="lname">last name</label>
+                                    <input type="text" name="lname" id="slname" placeholder="last name" >
+                                    <div class="error status" id="lname-error"></div>
+                              </div>
+
+                              <div class="phone sstep">
+                                    <label for="lname">phone</label>
+                                    <input type="text" name="phone" id="sphone" placeholder="phone">
+                                    <div class="error status" id="phone-error"></div>
+                              </div>
+                              
+                              <div class="address sstep">
+                                    <label for="address">address</label>
+                                    <input type="text" name="address" id="saddress" placeholder="address" value="">
+                                    <div class="error status" id="address-error"></div>
+                              </div>
+
+                              <div class="landmark sstep">
+                                    <label for="landmark">landmark</label>
+                                    <input type="text" name="landmark" id="slandmark" placeholder="landmark" > 
+                                    <div class="error status" id="landmark-error"></div>
+                              </div>
+                              
+                              <div class="city sstep">
+                                    <label for="state">State</label>
+                                    <select name="state" id="sstate" onchange="cgnc(this,'#scity');"> 
+                                          <option value selected>State</option>
+                                          {% for s in state %}
+                                          <option>{{s.state}}</option>
+                                          {% endfor %}
+                                    </select>
+                                    <div class="error status" id="state-error"></div>
+                              </div>
+
+                              <div class="city sstep">
+                                    <label for="city">city</label>
+                                    <select name="city" id="scity" onchange="cgnp(this,'#spin_code');"> 
+                                          <option value selected>City</option>
+                                    </select>
+                                    <div class="error status" id="city-error"></div>
+                              </div>
+
+                              <div class="pin sstep">
+                                    <label for="pin">pin</label>
+                                    <select name="pin_code" id="spin_code" >
+                                          <option value selected>Pincode</option>
+                                          
+                                    </select>
+                                    <div class="error status" id="pin_code-error"></div>
+                              </div>
+                        </div>
+                        <div class="title">
+                              <h4>billing address</h4>
+                        </div> 
+                        <div class="address-details check">
+                              <input type="checkbox" name="bill-address" id="bill-check" value="same" >
+                              <label for="cod">billing address is same as shipping address</label>
+                        </div>
+                                                  
+                        <div class="shiping-form" id="billing-form">
+                              <div class="fname bstep">
+                                    <label for="fname">first name</label>
+                                    <input type="text" name="bfname" placeholder="first name" id="bfname">
+                                    <div class="error status" id="bfname-error"></div>
+                              </div>
+                              <div class="lname bstep">
+                                    <label for="lname">last name</label>
+                                    <input type="text" name="blname" placeholder="last name" id="blname">
+                                    <div class="error status" id="blname-error"></div>
+                              </div>
+                              <div class="phone bstep">
+                                    <label for="phone">phone</label>
+                                    <input type="text" name="bphone" id="bphone">
+                                    <div class="error status" id="bphone-error"></div>
+                              </div>
+                              <div class="address bstep">
+                                    <label for="address">address</label>
+                                    <input type="text" name="baddress" placeholder="address" id="baddress">
+                                    <div class="error status" id="baddress-error"></div>
+                              </div>
+
+                              <div class="landmark bstep">
+                                    <label for="landmark">landmark</label>
+                                    <input type="text" name="blandmark" placeholder="landmark" id="blandmark"> 
+                                    <div class="error status" id="blandmark-error"></div>
+                              </div>
+                              
+                              <div class="city bstep">
+                                    <label for="state">State</label>
+                                    <select name="bstate" id="bstate" onchange="cgnc(this,'#bcity');">
+                                          <option value selected>State</option>
+                                          {% for s in state %}
+                                          <option>{{s.state}}</option>
+                                          {% endfor %}
+                                    </select>
+                                    <div class="error status" id="bcity-error"></div>
+                              </div>
+
+                              <div class="city bstep">
+                                    <label for="city">city</label>
+                                    <select name="bcity" id="bcity" onchange="cgnp(this,'#bpin_code');">
+                                          <option value selected>City</option>
+                                    </select>
+                                    <div class="error status" id="bcity-error"></div>
+                              </div>
+
+                              <div class="pin bstep">
+                                    <label for="bpin">pin</label>
+                                    <select name="bpin_code" id="bpin_code">
+                                          <option value selected>Pincode</option>
+                                    </select>
+                                    <div class="error status" id="bpin_code-error"></div>
+                              </div>
+                              <input type="hidden" id="shipping-value" name="shipping-value" >
+                              <input type="hidden" id="billing-value" name="billing-value" >
+                        </div>
+                         <button type="button" class="add-sub" id="add-sub">Continue</button>
+                  </div>
+
+                        <div class="order-summery-container" id="order-summery-container">
+                              <div class="title">
+                                    <h4>order summery</h4>
+                              </div>
+                              <div class="product-details">
+                              <h3>Cart products</h3>
+                              
+                              {% for cart in cart %}
+                              <div class="product" id="product-{{cart.product.id}}">
+                                    <img src="{{ cart.product.product_image.url }}" alt="" class="pro-img">
+                                    <div class="npq">
+                                          <div class="name">{{cart.product.title}}</div>
+                                           <div class="price">₹ {{cart.product.offer_price}} <span style="color:red;font-size:15px;text-decoration:line-through">₹ {{cart.product.price}}</span></div>
+                                          <div class="quntity">
+                                                Qty : {{cart.quantity}}
+                                          </div>
+                                        
+                                    </div>
+                              </div>
+                              <hr>
+                              {% endfor %}
+                        </div>
+
+                        <div class="address-details">
+                              <h3> <i class="fa-solid fa-location-dot"></i> shipping address</h3>
+                              <div class="address-dispay" id="address-dispay">
+                              
+                                    {% if shipping_address %}
+                                    {% for address in shipping_address %}
+                                         <i class='bx bx-user-circle'></i> {{user.user.first_name}} {{user.user.last_name}}<br>
+                                          <i class='bx bxs-phone'></i>  {{user.phone_one}}<br><br>
+                                         <i class="fa-solid fa-location-dot"></i> {{address}}
+                                    {% endfor   %}    
+                                    {% endif %}              
+                              </div>
+                              <button type="button" id="edit-sum">Change</button>
+                        </div>
+
+                        <div class="billing-details">
+                              <input type="hidden" value={{address.id}}>
+                              <h3><i class="fa-solid fa-location-dot"></i> billing address</h3>
+                              <div class="address-dispay" id="biling-address">
+                                    {% if shipping_address %}
+                                    {% for address in shipping_address %}
+                                         <i class='bx bx-user-circle'></i> {{user.user.first_name}} {{user.user.last_name}}<br>
+                                         <i class='bx bxs-phone'></i>  {{user.phone_one}}<br><br>
+                                         <i class="fa-solid fa-location-dot"></i> {{address}}
+                                    {% endfor   %}    
+                                    {% endif %}
+                              </div>
+                              <button type="button" id="edit-sum">Change</button>
+                        </div>
+
+                        <div class="billing-details">
+                              <h3> Notes </h3>
+                              <div class="address-dispay" id="biling-address">
+                                          Your order updates are being sent to your email address at {{user.user.email}}
+                                          <br> Keep an eye on your inbox for the latest information
+                                            
+
+                              </div>
+                        </div>
+
+                        <button type="button" class="sum-sub" >Continue</button>
+                        </div>
+
+                  <div class="pyment-form-container" id="pyment-form-container">
+                        <div class="title">
+                              <h4>select payment method</h4>
+                        </div>
+                        <input type="hidden" name="pay" id="method">
+                        <div>
+                              <button type="submit" onclick="paymentmode('COD')" class="cod" id="cod">cash on delivery</button>
+                        </div>
+                        <div>
+                              <input type="hidden" method="POST" id="razorpay_payment_id" name="razorpay_payment_id">
+                              <input type="hidden" method="POST" id="razorpay_order_id" name="razorpay_order_id">
+                              <input type="hidden" method="POST" id="razorpay_signature" name="razorpay_signature">
+      
+                              <button id="rzp-button1" class="cod" style="background-color:#FDA403;">Razorpay</button>
+                        </div>   
+                  </form>
+                  </div>
+            </div>
+            <div class="col-sec" >
+                  <div class="title">
+                        <h4>price details</h4>
+                  </div>
+                  <hr>
+                  <div class="charges">
+                        <div class="sub-col">
+                              <span>Price({{cart_user.total_product}} items)</span>
+                              <h3 class="price"> ₹{{cart_user.total_cart}}</h3>
+                        </div>
+                        <div class="sub-col">
+                              <span>Shipping Charges</span>
+                              <h3 class="price">
+                                    {% if shipping_charge == 0 %}
+                                    Free
+                                    {% else %}
+                                    ₹{{shipping_charge}}
+                                    {% endif %}
+                              </h3>
+                        </div>
+                        <div class="sub-col">
+                              <span>Discount</span>
+                              <h3 class="price">- ₹ {{discount}}</h3>
+                        </div>
+                  </div>
+                  <hr>
+                  <div class="total">
+                        <span>total payable</span>
+                        <h3 class="price">{{total}}</h3>
+                  </div>
+            </div>
+      </section>
+      <script>
+
+            
+      </script>
+      <!--razorpay javascript code -->
+      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      <script>
+            function paymentmode(obj){
+                  document.getElementById("method").value = obj;
+            }
+            var options = {
+            "key": "{{key_id}}", // Enter the Key ID generated from the Dashboard
+            "amount": "{{amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "{{request.first_name}} {{request.last_name}}", //your business name
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response){
+            var razorpay_order_id = response.razorpay_order_id;
+            var razorpay_payment_id = response.razorpay_payment_id;
+            var razorpay_signature = response.razorpay_signature;
+            
+            document.getElementById("razorpay_order_id").value=razorpay_order_id;
+            document.getElementById("razorpay_payment_id").value=razorpay_payment_id;
+            document.getElementById("razorpay_signature").value=razorpay_signature;
+            document.getElementById("method").value = "Razorpay";
+            document.getElementById("order").submit();
+            },
+            "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+                  "name": "abc bbb", //your customer's name
+                  "email": "abc.bbb.kumar@example.com",
+                  "contact": "9000090000" //Provide the customer's phone number for better conversion rates 
+                  },
+                  "notes": {
+                        "address": "Razorpay Corporate Office"
+                  },
+                  "theme": {
+                        "color": "#3399cc"
+                  }
+            };
+            var rzp1 = new Razorpay(options);
+            document.getElementById('rzp-button1').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
+            e.disabled = true;
+            }
+
+            
+      </script>
+      <script>
+            
+      </script>
+      <script src="{% static 'js/validation.js' %}"></script>
+      <script src="{% static 'js/scp.js' %}"></script>
+      <script src="{% static 'js/btn.js' %}"></script>
+    {% endblock %}
+

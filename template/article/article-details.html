@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+    {% block title %}product list{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/article-details.css' %}">
+    {% endblock %}
+
+    {% block content %}
+    <div class="main-section">
+        <div class="image">
+            <img src="{{ article.image.url }}" alt="">
+        </div>
+        <div class="article-title"> {{article.title}}</div>
+        <div class="article-details">
+            <pre>{{article.body}}</pre>
+            <pre id='date' ><b>Publice Date :- {{article.create_at}}</b></pre>
+        </div>
+    </div>
+
+    <!--article start-->
+  <div class="center-text">
+    <h2>related<span>Articles</span></h2>
+</div>
+<div class="blog">
+    {% for articleld in articleld|slice:":3" %}
+    <div class="row">
+        <img src="{{ articleld.image.url }}" alt="">
+        <div class="blog-text">
+            <h4>{{articleld.title}}</h4>
+            <a href="{% url 'showarticle' article_id=articleld.id %}"><p>view more</p></a>
+        </div>
+    </div>
+    {% endfor%}
+    
+</div>
+<!--product sectionn one  start-->
+<section class="trending-product" id="trending">
+    <div class="center-text">
+        <h2>related<span>Product</span></h2>
+    </div>
+    <div class="products">
+        
+        {% for p in product|slice:":4" %}
+                    <div class="row" id="reload{{p.id}}">
+                        <a href="{% url 'product' product_id=p.id %}">
+                            <img src="{{ p.product_image.url }}" alt="anan" loading="eager|lazy">
+                        </a>
+
+                        <div class="heart-icon" >
+                           
+                                {% if p.id in like %}
+                                <i class='bx bxs-heart' id="filledheartIcon-{{p.id}}" data-product={{p.id}}></i>
+                                {% else %}
+                                <i class='bx bx-heart' id="heartIcon-{{p.id}}" data-product={{p.id}}></i>
+                                {% endif %}
+                        </div>
+            
+                        <div class="ratting">
+                            <i class='bx {% if p.rating >= 1 %}bxs-star{% elif p.rating >= 0.5 %}bxs-star-half{% else %}bx-star{% endif %} ' ></i>
+                            <i class='bx {% if p.rating >= 2 %}bxs-star{% elif p.rating >= 1.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                            <i class='bx {% if p.rating >= 3 %}bxs-star{% elif p.rating >= 2.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                            <i class='bx {% if p.rating >= 4 %}bxs-star{% elif p.rating >= 3.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+                            <i class='bx {% if p.rating >= 5 %}bxs-star{% elif p.rating >= 4.5 %}bxs-star-half{% else %}bx-star{% endif %}' ></i>
+
+                        </div>
+                        <div class="price">
+                            <a href="{% url 'product' product_id=p.id %}">
+                                <h4>{{p.title}}</h4>
+                            </a>
+                            <p class="product-price">{{p.price}}</p>
+                        </div>
+                        <div>
+                            {% if p.quantity == 0 %}
+                                <button type="submit" class="add-to-cart-btn out-stock" >Out Of Stock</button>
+                            {% else %}
+                                {% if user.is_authenticated %}
+                                    {% if p.id in cart_product_list %}
+                                        <a href="{% url 'cart' %}"><button type="submit" class="add-to-cart-btn" >Go to cart</button></a>
+                                    {% else %}
+                                        <button type="submit" class="add-to-cart-btn" data-product-id={{ p.id }}>Add to Cart</button>
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{% url 'login' %}"><button type="submit" class="add-to-cart-btn" >Add to Cart</button></a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+        {% endfor %}
+    </div>
+  </section>
+{% endblock %}

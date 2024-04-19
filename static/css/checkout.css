@@ -1,0 +1,410 @@
+*{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Rubik', sans-serif;
+      list-style: none;
+      text-decoration: none;
+}
+div#error {
+      display: none;
+      width: 100%;
+      border: 1px solid red;
+      padding: 10px;
+      font-size: 20px;
+      border-radius: 5px;
+      color: white;
+      background-color: #c70000ba;
+}
+#shiping-form-container, #pyment-form-container, #order-summery-container, .col-sec{
+      box-shadow: 0px 2px 8px gray inset;
+      border-radius: 15px;
+      padding: 20px 40px;
+      margin: 10px;
+      width: 100%;   
+}
+#pyment-form-container, #order-summery-container{
+      display: none;
+}
+.title{
+      margin: 10px 0px;
+      font-size: 30px;
+      color:green;
+      text-transform: capitalize;
+}
+.shiping-form{
+      flex-wrap: wrap;
+      flex-direction: column;
+      width: 100%;
+      margin: 20px 0px;
+      border-radius: 10px;
+      padding: 20px 10px;
+      box-shadow: 0px 2px 8px green;
+      border: 1px solid green;
+}
+#shiping-form{
+      display: none;
+}
+.shiping-form div{
+      margin-bottom: 20px;
+} 
+.shiping-form label{
+      text-transform: capitalize;
+      margin-left: 5px;
+      font-size: 13px;
+      color: green;
+      font-weight: 550;
+      display: block;
+}
+.shiping-form input{
+      width: 80%;
+      display: block;
+      font-size: 20px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid green;
+      margin-top: 2px;
+}
+textarea#id_ship-address, textarea#id_bill-address {
+      width: 80%;
+      height: 80px;
+      border-radius: 10px;
+      resize: none;
+      margin-bottom: 20px;
+      border: 1px solid green;
+  }
+
+.shiping-form select{
+      width: 40%;
+      
+      font-size: 18px;
+      padding: 7px 8px;
+      border-radius: 8px;
+      flex: 1 0 30%;
+      border: 1px solid green;
+
+      margin-top: 2px;
+}
+
+.shiping-form div {
+      
+      margin-bottom: 20px;
+      margin-top: 5px;
+      margin-left: 5px;
+      color: red;
+      font-size: 12px;
+  }
+.status{
+      display: none;
+}
+.add-sub, .pay-sub, .sum-sub, .add-upd{
+      width: 100%;
+      background-color: green;
+      color: white;
+      font-size: 23px;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      transition: all .5s ease;
+}
+.add-sub:hover, .pay-sub:hover, .sum-sub:hover, .add-upd:hover{
+      transform: scale(1.1);
+}
+#pyment-form{
+      margin-top: 25px;
+}
+.cod{
+      font-size: 18px;
+      border-radius: 5px;
+      width: 200px;
+      padding: 10px;
+      margin: 10px 0px;
+}
+.pyment-form-container label{
+      text-transform: capitalize;
+      font-size: 20px;
+      margin-left: 10px;
+}
+.pay-sub{
+      width: 100%;
+      margin-top: 20px;
+}
+.product{
+      padding: 0px 10px;
+      width: 100%;
+      display: flex;
+}
+.pro-img{
+      display: inline;
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+}
+.npq{
+      width: 80%;
+      margin-left: 10px;
+      padding: 0px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+}
+.name{
+      width: 80%;
+      white-space: nowrap;;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 20px;
+}
+
+.price{
+      color: green;
+      font-size: 20px;
+      font-weight: 600;
+}
+.cart-add {
+      display: flex;
+  }
+.btn-remove, .btn-add{
+      padding: 5px;
+  }
+.cart-add input{
+      padding: 0px 5px;
+      width: 20px;
+      margin: 0px 5px;
+  }
+.quntity{
+      width: fit-content;
+      display: flex;
+      align-items: center;
+}
+input[type='number'] {
+      border-radius: 5px;
+      border: 1px solid green;
+      width: 40%;
+      padding: 5px 7px;
+}
+.quntity i{
+      font-size: 20px;
+      margin-left: 20px;
+      color: green;
+      transition: all .5s ease;
+}
+.quntity i:hover{
+      transform: scale(1.2);
+}
+.order-summery-container h3{
+      color: green;
+      text-decoration: underline;
+}
+.address-dispay{
+      font-size: 18px;
+      color: rgb(60, 59, 59);
+      
+}
+#edit,#new,#edit-sum,#cln{
+      margin-right: 15px;
+      align-self:flex-end;
+      width: 20%;
+      text-align: center;
+      padding: 5px;
+      color: green;
+      background-color: white;
+      border-radius: 10px;
+      border: 1px solid green;
+      transition: all .5s ease;
+}
+#edit:hover,#new:hover,#edit-sum:hover{
+      background-color: green;
+      color: white;
+      transform: scale(1.1);
+}
+#cln{
+      display: none;
+}
+.charges{
+      margin: 20px 0px 20px 0px;
+}
+.sub-col h3{
+      font-weight: 400;
+}
+.total{
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0px;
+      font-size: 20px;
+}
+.total span{
+      text-transform: capitalize;
+      font-weight: 540;
+}
+.total h3{
+      font-size: 20px;
+}
+/*---------------------------*/
+#checkout-container{
+      width: 100%;
+      display: flex;
+      gap:3%;
+}
+.col-one{
+      width: 70%;
+}
+.col-sec{
+      position: sticky;
+      top:35%;
+      width: 30%;
+      height: fit-content;
+}
+.product-details, .address-details, .billing-details{
+      width: 100%;
+      margin: 20px 0px;
+      border-radius: 10px;
+      padding: 20px 10px;
+      border: 1px solid green;
+      display: flex;
+      flex-direction:column;
+      gap: 15px;
+      text-transform: capitalize;
+}
+.sub-col{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      font-size: 20px;
+}
+
+@media screen and (max-width:1077px) {
+      #checkout-container{
+            gap:2%;
+      }
+      .title{
+            font-size: 18px;
+      }
+      .price, .total span, .sub-col{
+            font-size: 15px;
+      }
+      #shiping-form-container, #pyment-form-container, #order-summery-container, .col-sec{
+            padding: 20px;
+      }
+      .address-dispay{
+            font-size: 13px;
+      }
+      .add-sub, .pay-sub, .sum-sub, .add-upd{
+            font-size: 18px;
+            padding: 8px
+      }
+}
+@media screen and (max-width:693px){
+      .progress {
+            font-size: 13px;
+        }
+      #checkout-container{
+            padding: 10px;
+            flex-direction: column;
+            justify-content: center;
+
+      }
+      #shiping-form-container, #pyment-form-container, #order-summery-container, .col-sec, .col-one{
+            width: 100%;
+            margin: 5px 0px 10px 0px;
+      }
+      .shiping-form input {
+            font-size: 15px;
+            padding: 8px;
+      }
+      .shiping-form select{
+            font-size: 15px;
+            padding: 8px;
+      }
+      .pyment-form-container label {
+            font-size: 15px;
+      }
+
+}
+
+/*------------------*/
+
+.progress-bar{
+      margin:20px 30px;
+}
+#r-a,#r-b{
+      width: 20px;
+      height: 20px;
+      accent-color: green;
+}
+
+.progress {
+      display: flex;
+      justify-content: space-between;
+      list-style-type: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    .progress li {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .progress li:before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #ccc;
+      display: block;
+      margin: 0 auto 10px auto;
+      line-height: 20px;
+      text-align: center;
+    }
+    .progress li.active:before {
+      background-color: green; /* Active step color */
+      color: #fff;
+    }
+    .progress li.active:after {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 2px;
+      background-color: green; /* Active step line color */
+    }
+
+    @media screen and (max-width:475px){
+      .progress{
+            font-size: 10px;
+      }
+      .progress li.active:after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 2px;
+            background-color: green;
+        }
+        .progress li:before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            display: block;
+            margin: 0 auto 10px auto;
+            line-height: 10px;
+            text-align: center;
+        }
+}
+
+.hide{
+      display: none;
+}
+
+
+.check{
+      display: flex;
+      flex-direction: row;
+}

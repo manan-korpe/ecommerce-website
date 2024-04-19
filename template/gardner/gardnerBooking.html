@@ -1,0 +1,272 @@
+    {% extends 'base.html' %}
+
+    {% block title %}product list{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/gardnerlist.css' %}">
+        <link rel="stylesheet" href="{% static 'css/gardnerbooking.css' %}">
+    {% endblock %}
+
+    {% block content %}
+  <div class="booking">
+    <div class="bookig-container-form">
+      <div class="formbold-main-wrapper">
+              <div class="formbold-form-wrapper">
+                <div id="error"><p>{{ error_message }}</p></div>
+                <style>
+                </style>
+                <form action="" method="POST" data-parsley-validate="">
+                  {% csrf_token %}
+                  <div class="flex flex-wrap formbold--mx-3">
+                        <div class="w-full sm:w-half formbold-px-3">
+                          <div class="formbold-mb-5 w-full">
+                            <label for="date" class="formbold-form-label"> Date </label>
+                            <input
+                              type="date"
+                              name="date"
+                              id="dateInput"
+                              class="formbold-form-input"
+                              onchange="cheackSlot()"
+                              data-parsley-required="true" 
+                              data-parsley-required-message="Plase Select date."
+                            />
+                          </div>
+                        </div>
+                        <div class="w-full sm:w-half formbold-px-3">
+                          <div class="formbold-mb-5">
+                            <label for="time" class="formbold-form-label" style="text-align: center;">Time - Slot </label>
+                            <div class="formbold-main-wrapper-slot" id="update-slot">
+                                  <input type="hidden" id="slot-time" name="slot-time" required>
+                                  {% for slot in slots %}
+                                        <button type="button" class="formbold-form-input-slot slot slot-btn" onclick="setTime(this)">{{slot}}</button>
+                                  {% endfor %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <style>
+                          .selected {
+                              background-color: green;
+                          }
+                          .slot:hover{
+                                transform: scale(1);
+                                background-color: white;
+                                color:green;                    
+                          }
+                      </style>    
+                  <div class="formbold-mb-5">
+                    <label for="name" class="formbold-form-label"> First Name </label>
+                    <input
+                      type="text"
+                      name="fname"
+                      id="fname"
+                      placeholder="First Name"
+                      class="formbold-form-input"
+                      data-parsley-required="true" 
+                      data-parsley-required-message="This field is required."
+                    />
+                  </div>
+                  <div class="formbold-mb-5">
+                    <label for="name" class="formbold-form-label"> Last Name </label>
+                    <input
+                      type="text"
+                      name="lname"
+                      id="lname"
+                      placeholder="Last Name"
+                      class="formbold-form-input"
+                      data-parsley-required="true" 
+                      data-parsley-required-message="This field is required."
+                    />
+                  </div>
+                  <div class="formbold-mb-5">
+                    <label for="phone" class="formbold-form-label"> Phone Number </label>
+                    <input
+                      type="text"
+                      name="phone"
+                      id="phone"
+                      placeholder="Enter your phone number"
+                      class="formbold-form-input"
+                      data-parsley-required="true" 
+                      data-parsley-required-message="This field is required."
+                      data-parsley-pattern="/^[7-9][0-9]{9}$/"
+                      data-parsley-pattern-message="Please enter a valid mobile phone number."
+                    />
+                  </div>
+                  <div class="formbold-mb-5">
+                    <label for="email" class="formbold-form-label"> Email Address </label>
+                    <input
+                      type="text"
+                      name="email"
+                      id="email"
+                      placeholder="Enter your email"
+                      class="formbold-form-input"
+                      data-parsley-pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" data-parsley-pattern-message="Enter Valid Email id"  
+                      data-parsley-required="true" data-parsley-required-message="This field is required."
+                    />
+                  </div>
+                  
+                  <div class="formbold-mb-5 formbold-pt-3">
+                    <label class="formbold-form-label formbold-form-label-2">
+                      Address Details
+                    </label>
+                    <div class="flex flex-wrap formbold--mx-3">
+                      <div class="w-full sm:w-half formbold-px-3">
+                        <div class="formbold-mb-5">
+                          <input
+                            type="text"
+                            name="area"
+                            id="area"
+                            placeholder="Enter area"
+                            class="formbold-form-input"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="w-full sm:w-half formbold-px-3">
+                        <div class="formbold-mb-5">
+                          <select name="state" id="state" onchange="cgnc(this,'#city');" class="formbold-form-input" data-parsley-required="true" data-parsley-required-message="Select City">
+                            <option disabled selected>State</option>
+                            {% for s in state %}
+                              <option>{{s.state}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="w-full sm:w-half formbold-px-3">
+                        <div class="formbold-mb-5">
+                          <select name="city" id="city" onchange="cgnp(this,'#post-code');" placeholder="Enter state" class="formbold-form-input" required >
+                          <option disabled selected>City</option>
+
+                          </select>
+                        </div>
+                      </div>
+                      <div class="w-full sm:w-half formbold-px-3">
+                        <div class="formbold-mb-5">
+                          <select name="post-code" id="post-code" class="formbold-form-input" data-parsley-required="true" data-parsley-required-message="Select Pin code">
+                            <option disabled selected>Post Code</option>
+                      
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <button class="formbold-btn">Book Gardener</button>
+                  </div>
+                </form>
+              </div>
+      </div>
+    </div>
+    <div class="gardner-container-form">
+    <label class="formbold-form-label formbold-form-label-2 title">
+        Service Information 
+    </label>
+    <table>
+    <tr>
+      <td>Service Name </td>
+      <td>{{gardner.service.title}}</td>
+    </tr>
+    <tr>
+      <td>Service type</td>
+      <td>{{gardner.service.service}}</td>
+    </tr>
+    <tr>
+      <td>Charges</td>
+      <td>₹ {{gardner.offer_price}} <span style="font-size: 12  px;text-decoration: line-through;color:red;">₹ {{gardner.price}}</span></td>
+    </tr>
+    <tr>
+      <td>Service take time</td>
+      <td>{{ gardner.service_time|time:"h" }}:{{ gardner.service_time|time:"i" }} hours
+      </td>
+    </tr>
+    <tr>
+      <td>Service Place</td>
+      <td>Customer</td>
+    </tr>
+    </table>
+    </div>
+  </div>
+
+    <script>
+        function cheackSlot(){
+            var service = "{{gardner.id}}";
+            var date = $("#dateInput").val();
+            var slots = '{{slots|safe|escapejs}}';
+            var jsondata = JSON.stringify(slots);
+
+            document.getElementById("slot-time").value=null;
+            var buttons = document.getElementsByClassName('formbold-form-input-slot');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('selected');
+            }
+            var button = document.querySelectorAll(".slot-btn");
+            
+
+            $.ajax({
+                  type:"GET",
+                  url:"/gardner/dateslot/",
+                  data:{
+                        "service":service,
+                        "date":date,
+                        "slots":jsondata,
+                  },
+                  success:function(response){
+                        not_avl = response.not_avl_slot;
+                            
+                            button.forEach(function(b) {
+                                console.log(b);
+                                b.setAttribute("onclick", "setTime(this)");
+                                b.classList.remove('not-avl');
+                            });
+                            button.forEach(function(b) {
+                              button_value = b.innerHTML;
+                              not_avl.forEach(function(val){
+                                if(button_value==val){
+                                  console.log(b);
+                                  b.removeAttribute("onclick");
+                                  b.classList.add('not-avl');
+                                }                                                       
+                              });
+                            });
+                  },
+                  error: function(xhr, status, error) {
+                        console.error(error);
+                  }
+            });
+        }
+        function updateMinDate() {
+          // Get today's date
+          var today = new Date();
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+          var yyyy = today.getFullYear();
+
+          today = yyyy + '-' + mm + '-' + dd;
+
+          // Set the minimum date for the date input field to today
+          document.getElementById("dateInput").min = today;
+        }
+
+      // Call the function to set the initial minimum date
+      updateMinDate();
+      // Add event listener to update the minimum date whenever the input changes
+      document.getElementById("dateInput").addEventListener("change", updateMinDate);
+
+      function setTime(obj){
+          var val = obj.innerHTML;
+        document.getElementById("slot-time").value=val;
+
+        var buttons = document.getElementsByClassName('formbold-form-input-slot');
+          for (var i = 0; i < buttons.length; i++) {
+              buttons[i].classList.remove('selected');
+          }
+          
+          // Add the 'selected' class to the clicked button
+          obj.classList.add('selected');
+      }
+    </script>
+    <script src="{% static 'js/scp.js' %}"></script>
+    {% endblock %}

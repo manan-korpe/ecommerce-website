@@ -1,0 +1,116 @@
+    {% extends 'base.html' %}
+
+    {% block title %}order detail{% endblock %}
+
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'css/order-details.css' %}">
+    {% endblock %}
+
+    {% block content %}
+
+    <div class="order-details">
+           <div class="id-date">
+                  <div class="title">OrderID : <span>{{order.id}}</span></div>
+                  <div class="date">{{order.created|date:"F j, Y"}}</div>
+            </div>
+            <table class="product-details">
+                  <tr>
+                        <th colspan="2">Product Name</th>
+                        <th>Product code</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                  </tr>
+                  {% for item in orderItem %}
+                  <tr>
+                        <td><a href="{% url 'product' product_id=item.product.id %}"><img src="{{ item.product.product_image.url }}" alt="not found" class="product-image"></a></td>
+                        <td><a href="{% url 'product' product_id=item.product.id %}" style="color:darkgreen">{{item.product.title}}</a></td>
+                        <td><a href="{% url 'product' product_id=item.product.id %}" style="color:darkgreen">{{item.product.id}}</a></td>
+                        <td>{{item.quantity}}</td>
+                        <td>₹ {{item.discount_price}}</td>
+                        <td>₹ {{item.subtotal}}</td>
+                  </tr>
+                  {% endfor %}
+            </table>
+            <div class="order-details-second">
+                  <div class="shipping-billing">
+                        <div class="shipping">
+                              <div class="sbtitle">Shipping address</div>
+                              <div class="address">   
+                                    <i class='bx bx-user-circle'></i> {{order.fname}} {{order.lname}}<br>
+                                    <i class='bx bxs-phone'></i> {{order.phone}}<br><br>
+                                    <i class="fa-solid fa-location-dot"></i> {{order.address}},{{order.city}},{{address.state}},{{order.pin_code}}
+                              </div>
+                        </div>
+                        <div class="shipping">
+                              <div class="sbtitle">billing address</div>
+                              {% if bill %}
+                              {% for bill in bill %}
+                              <div class="address">
+                                   <i class='bx bx-user-circle'></i> {{bill.fname}} {{bill.lname}}<br>
+                                    <i class='bx bxs-phone'></i> {{bill.phone}}<br><br>
+                                    <i class="fa-solid fa-location-dot"></i> {{bill.address}},{{bill.city}},{{bill.state}},{{bill.pin_code}}
+
+                              </div>
+                              {% endfor %}
+                              {% else %}
+                              <div class="address">
+                              NO Billing Address</div>
+                              {% endif %}
+                        </div>      
+                  </div>
+                  <div class="payable">
+                        <div class="method">
+                              <div class="ptitle">
+                                    <h4>Payment</h4>
+                              </div>
+                              <div class="method-details">
+                                          <div class="sub-col">
+                                                <span>Payment Method</span>
+                                                <div>{{payment.payment_method}}</div>
+                                          </div>
+                                          {% if payment.payment_method != "COD" %}
+                                                <div class="sub-col">
+                                                      <span>Payment ID</span>
+                                                      <div>#{{payment.payment_id}}</div>
+                                                </div>
+                                          {% endif %}
+                                          <div class="sub-col">
+                                                <span>Payment Status</span>
+                                                <div>{{payment.status}}</div>
+                                          </div>
+                                                                                    
+                                    </table>
+                              </div>
+                        </div>
+                        
+                        <div class="price-charges">
+                              <div class="ptitle">
+                                    <h4>price details</h4>
+                              </div>
+                              <div class="charges">
+                                    <div class="sub-col">
+                                          <span>Price</span>
+                                          <h3 class="price">₹ {{order.amount}}</h3>
+                                    </div>
+                                    <div class="sub-col">
+                                          <span>Delivery Charges</span>
+                                          <h3 class="price">₹ {{order.shipping_charges}}</h3>
+                                    </div>
+                                    <div class="sub-col">
+                                          <span>discount</span>
+                                          <h3 class="price" style="color: red;">₹ {{order.discount}}</h3>
+                                    </div>
+                              </div>
+                              <div class="total">
+                                    <span>Total Amount</span>
+                                    <h3 class="price">₹ {{order.total_amount}}</h3>
+                              </div>
+                  
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+    {% endblock %}

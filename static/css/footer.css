@@ -1,0 +1,70 @@
+.contact{
+    margin-top:20px;
+    padding: 20px 10%;
+    background-color: rgba(172, 255, 47, 0.070);
+    box-shadow: 5px -2px 8px rgba(0, 0, 0, .2);
+}
+.contact-info{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(160px,auto));
+    gap:3rem;
+    padding: 30px 10px;
+}
+
+.first-info img{
+    width: 140px;
+    height: auto;
+}
+.first-info p{
+    padding-top: 12px;
+}
+.contact-info h4{
+    color: green;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+footer .contact-info p, .contact-info span{
+    color: #565656;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 1.5;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all .42s;
+}
+.contact-info p:hover{
+    transform: scale(1.2);
+    color: green;
+}
+.end-text{
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom:10px;
+}
+.end-text span{
+    font-size: 15px;
+}
+
+
+@media screen and (max-width:790px){
+    .contact{
+        padding: 20px 20px;
+    }
+    .contact-info{
+        gap: 1.5rem;
+        padding: 10px 10px;
+    }
+    .end-text{
+        padding-top: 5px;
+    }
+    .contact-info p,span{
+        line-height: 1.2;
+       margin-bottom: 3px;
+    }
+}
+
+.bx{
+    color:green;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+         {% block title %}{% endblock %}
+    </title>
+
+    {% block extra_head %}{% endblock %}
+
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/parsley.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   
+</head>
+<body>
+
+    
+    {% include 'header.html' %}
+    
+    <!--success or error maessge on top -->
+    <div class="messages-container">
+      <ul class="message">
+          {% if messages %}
+          {% for message in messages %}
+          <li class="{{message.tags}}">{{message}}
+            <button class="close-btn" onclick="closeElement()"><i class='bx bx-x'></i></button>
+          </li>
+          {% endfor %}
+          {% endif %}
+          
+      </ul>
+    </div>
+
+    {% block content %}{% endblock %}
+    {% include 'footer.html' %}
+    <!--{% include 'page-loder.html' %}-->
+</div>
+
+    <script src="{% static 'js/jsonfun.js' %}"></script>
+    <script src="{% static 'js/header.js' %}"></script>
+    <script src="{% static 'js/cart.js' %}"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.7.0/parsley.min.js"></script>
+    <script>
+       function closeElement() {
+            var element = document.querySelector(".messages-container");
+            element.parentNode.removeChild(element); // Remove the element
+        }
+        
+    </script>
+</body>
+</html>
