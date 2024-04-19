@@ -1,0 +1,14 @@
+GreenHeaven Nursery E-commerce Website
+This project is an e-commerce website for GreenHeaven Nursery, specializing in selling plants and plant-related products. The website provides various functionalities to enhance user experience and facilitate transactions.
+
+Functionalities:
+Product Catalog and Search Functionality: Users can browse through a wide range of plants and plant-related products. They can utilize the search functionality to find specific items quickly.
+Shopping Cart: Users can add products to their cart while browsing and proceed to checkout when ready to purchase.
+Watchlist: Users can maintain a watchlist of favorite items they intend to purchase in the future or are interested in.
+Order Placement: Users can place orders for plants and plant-related products, selecting quantity and preferred delivery options.
+Payment Options: The website offers online payment options for secure transactions. Additionally, users have the choice for Cash on Delivery.
+Review and Rating: After receiving their ordered products, users can leave reviews and ratings to share their experiences and help others make informed decisions.
+Plant Articles: Users can access articles related to plants, offering valuable information and tips for plant care.
+Gardener Booking Functionality: Users can book gardeners for assistance with plant care. They can select a preferred time slot for the service.
+Order History: Users can view their past orders to track purchases and reorder items if necessary.
+Gardener Booking History: Users can view a history of their gardener bookings, including details of services provided.
